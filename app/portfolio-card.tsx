@@ -90,29 +90,15 @@ export function PortfolioCard({ index, item }: PortfolioCardProps) {
         ) : null}
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        <div className="absolute left-5 top-5 rounded-full bg-white/92 px-4 py-2 text-xs font-bold uppercase text-black backdrop-blur">
-          визуальная заготовка
-        </div>
-        <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-black/88 px-6 py-5 text-white backdrop-blur">
-          <span className="text-sm font-bold uppercase text-white/58">
-            {item.type}
-          </span>
-          <span className="text-sm font-bold text-white/58">
-            {String(index + 1).padStart(2, '0')}
-          </span>
-        </div>
       </div>
 
-      <div className="mt-5 flex items-start justify-between gap-6">
+      <div className="mt-5">
         <div>
           <h3 className="text-3xl font-semibold sm:text-4xl">{item.title}</h3>
-          <p className="mt-3 text-base leading-7 text-foreground/52">
+          <p className="mt-2 text-base leading-7 text-foreground/52">
             {item.note}
           </p>
         </div>
-        <span className="mt-3 shrink-0 rounded-full border border-black/14 px-4 py-2 text-xs font-bold uppercase text-foreground/52">
-          {item.video ? 'hover video' : 'без ссылки'}
-        </span>
       </div>
     </article>
   );

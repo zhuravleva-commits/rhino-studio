@@ -156,6 +156,17 @@ body {
   box-shadow: 0 24px 80px rgb(0 0 0 / 12%);
 }
 
+.showreel-milky-background {
+  background:
+    linear-gradient(rgb(255 255 255 / 28%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 28%) 1px, transparent 1px),
+    radial-gradient(circle at 12% 76%, rgb(255 251 238 / 92%) 0, transparent 28%),
+    radial-gradient(circle at 84% 18%, rgb(202 227 251 / 86%) 0, transparent 32%),
+    radial-gradient(circle at 55% 55%, rgb(255 255 255 / 94%) 0, transparent 38%),
+    linear-gradient(135deg, #edf3f8 0%, #dcecfb 48%, #f8f3eb 100%);
+  background-size: 48px 48px, 48px 48px, auto, auto, auto, auto;
+}
+
 .intro-film-card {
   box-shadow: 0 24px 80px rgb(0 0 0 / 14%);
 }
@@ -224,10 +235,6 @@ body {
 .portfolio-card {
   animation: portfolio-card 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: var(--portfolio-delay, 0ms);
-}
-
-.portfolio-card:nth-child(even) {
-  margin-top: 120px;
 }
 
 .portfolio-media {
