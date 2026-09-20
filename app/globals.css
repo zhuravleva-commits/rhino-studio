@@ -57,6 +57,35 @@ body {
   text-rendering: geometricPrecision;
 }
 
+/* The illustration has real alpha transparency, so the section's background
+   and ambient light remain continuous around the model. */
+.process-route-visual {
+  position: relative;
+  aspect-ratio: 1651 / 953;
+}
+
+.process-route-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: saturate(0.84) brightness(0.94);
+}
+
+.process-development-image {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 4.5%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 4.5%,
+    #000 100%
+  );
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0 0 0);
