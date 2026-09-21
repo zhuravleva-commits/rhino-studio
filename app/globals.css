@@ -185,6 +185,184 @@ body {
   box-shadow: 0 18px 56px rgb(0 0 0 / 10%);
 }
 
+/* Герой: каркас страницы собирается сам за 5 с и растворяется. Проценты в
+   кейфреймах — это доли тех же 5 с, поэтому все элементы идут одним циклом;
+   разложить их через animation-delay нельзя — задержка рассинхронизирует петлю. */
+.hero-wireframe {
+  --hw-dur: 5s;
+}
+
+.hw-frame {
+  stroke-dasharray: 1;
+  animation: hw-frame var(--hw-dur) linear infinite;
+}
+
+@keyframes hw-frame {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 1;
+  }
+  12%,
+  84% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+.hw-chrome,
+.hw-headline,
+.hw-text,
+.hw-button,
+.hw-card {
+  opacity: 0;
+}
+
+.hw-chrome {
+  animation: hw-chrome var(--hw-dur) ease infinite;
+}
+
+@keyframes hw-chrome {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  22%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hw-headline {
+  animation: hw-headline var(--hw-dur) ease infinite;
+}
+
+@keyframes hw-headline {
+  0%,
+  24% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  32%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hw-text {
+  animation: hw-text var(--hw-dur) ease infinite;
+}
+
+@keyframes hw-text {
+  0%,
+  32% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  42%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hw-button {
+  animation: hw-button var(--hw-dur) cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  transform-box: fill-box;
+  transform-origin: left center;
+}
+
+@keyframes hw-button {
+  0%,
+  42% {
+    opacity: 0;
+    transform: scaleX(0.4);
+  }
+  52%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hw-card-1 {
+  animation: hw-card-1 var(--hw-dur) ease infinite;
+}
+
+.hw-card-2 {
+  animation: hw-card-2 var(--hw-dur) ease infinite;
+}
+
+.hw-card-3 {
+  animation: hw-card-3 var(--hw-dur) ease infinite;
+}
+
+@keyframes hw-card-1 {
+  0%,
+  54% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  62%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hw-card-2 {
+  0%,
+  58% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  66%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hw-card-3 {
+  0%,
+  62% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  70%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 
 /* Кадр ролика подгоняется под статичную иконку: высота задаётся в долях
    области иконки, сдвиг — в долях собственного размера видео. */
@@ -434,6 +612,12 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .hero-reveal,
   .hero-strip,
+  .hw-frame,
+  .hw-chrome,
+  .hw-headline,
+  .hw-text,
+  .hw-button,
+  .hw-card,
   .intro-film-sweep,
   .intro-film-screen,
   .intro-film-ui,
@@ -447,6 +631,18 @@ body {
 
   .portfolio-card:nth-child(even) {
     margin-top: 0;
+  }
+
+  .hw-chrome,
+  .hw-headline,
+  .hw-text,
+  .hw-button,
+  .hw-card {
+    opacity: 1;
+  }
+
+  .hw-frame {
+    stroke-dasharray: none;
   }
 
   * {

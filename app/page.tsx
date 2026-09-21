@@ -1,4 +1,5 @@
 import { PortfolioCard } from './portfolio-card';
+import { HeroWireframe } from './hero-wireframe';
 import { ServiceCard } from './service-card';
 import { ProcessReel } from './process-reel';
 
@@ -139,31 +140,37 @@ export default function Home() {
       </header>
 
       <section className="mx-auto flex min-h-svh max-w-[1360px] flex-col justify-center px-5 pb-24 pt-[136px] sm:px-8 sm:pt-[152px] lg:px-12">
-        <div className="hero-reveal mx-auto max-w-5xl text-center">
-          <h1
-            aria-label="RHINO STUDIO"
-            className="flex flex-wrap items-baseline justify-center gap-x-[0.22em] text-6xl font-semibold leading-[0.95] tracking-[-0.065em] sm:text-7xl lg:text-8xl"
-          >
-            <span className="inline-flex items-end">
-              RH
-              <span className="relative inline-block h-[0.86em] w-[0.42em] shrink-0 -translate-y-[0.055em]" aria-hidden="true">
-                <svg
-                  className="absolute inset-x-0 bottom-0 h-full w-full"
-                  viewBox="0 0 44 92"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M36 92C35 57 27 25 6 4C13 30 15 61 13 92H36Z" fill="currentColor" />
-                </svg>
+        <div className="hero-reveal grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-16">
+          <div>
+            <h1
+              aria-label="RHINO STUDIO"
+              className="flex flex-wrap items-baseline gap-x-[0.22em] text-6xl font-semibold leading-[0.95] tracking-[-0.065em] sm:text-7xl lg:text-8xl"
+            >
+              <span className="inline-flex items-end">
+                RH
+                <span className="relative inline-block h-[0.86em] w-[0.42em] shrink-0 -translate-y-[0.055em]" aria-hidden="true">
+                  <svg
+                    className="absolute inset-x-0 bottom-0 h-full w-full"
+                    viewBox="0 0 44 92"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M36 92C35 57 27 25 6 4C13 30 15 61 13 92H36Z" fill="currentColor" />
+                  </svg>
+                </span>
+                NO
               </span>
-              NO
-            </span>
-            <span>STUDIO</span>
-          </h1>
+              <span>STUDIO</span>
+            </h1>
 
-          <p className="mx-auto mt-7 max-w-3xl text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">
-            Создаём цифровые продукты для сильных идей.
-          </p>
+            <p className="mt-7 max-w-xl text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">
+              Создаём сайты, которые продают.
+            </p>
+          </div>
+
+          <div className="mx-auto w-full max-w-[560px] lg:max-w-none">
+            <HeroWireframe />
+          </div>
         </div>
       </section>
 
