@@ -60,8 +60,8 @@ const portfolioItems = [
     type: 'Веб-приложение',
     title: 'CRM для сервисной компании',
     note: 'заявки, диспетчеризация и контроль показателей',
-    image: '/portfolio-crm-dark.png',
-    video: '/portfolio-crm-hover.mp4',
+    image: '/portfolio-crm-pages-preview.png',
+    video: '/portfolio-crm-pages-hover.mp4',
   },
   {
     type: 'Мобильное приложение',
