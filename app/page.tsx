@@ -79,10 +79,10 @@ export default function Home() {
         <Image
           alt="Первый экран Rhino Studio в редакционном стиле"
           className="reference-hero__image"
-          height="945"
+          height="2160"
           priority
-          src="/rhino-editorial-hero.png"
-          width="1680"
+          src="/rhino-editorial-hero-4k.png"
+          width="3840"
         />
 
         <h1 className="sr-only" id="reference-hero-title">Rhino Studio — создаём сайты, которые продают</h1>
@@ -106,7 +106,7 @@ export default function Home() {
           <h2>RHINO<br />STUDIO</h2>
           <p>Создаём сайты, которые продают.</p>
           <a className="reference-hero-mobile__cta" href="mailto:hello@rhino.studio">Обсудить проект <span>↗</span></a>
-          <Image alt="Превью цифрового продукта Rhino Studio" height="945" src="/rhino-editorial-hero.png" width="1680" />
+          <Image alt="Превью цифрового продукта Rhino Studio" height="2160" src="/rhino-editorial-hero-4k.png" width="3840" />
         </div>
       </section>
 
