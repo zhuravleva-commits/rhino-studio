@@ -62,7 +62,7 @@ export function ProcessReel() {
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgb(113_154_255_/_28%),transparent_46%)]"
         />
 
-        <div className="relative grid items-center gap-8 lg:min-h-[410px] lg:grid-cols-[0.95fr_1.65fr] lg:gap-2">
+        <div className="relative grid items-center gap-8 lg:h-[540px] lg:min-h-0 lg:grid-cols-[0.95fr_1.65fr] lg:gap-2">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-white/50">
               {String(activeStep + 1).padStart(2, '0')} / {step.label}
@@ -155,18 +155,16 @@ export function ProcessReel() {
               />
             </figure>
           ) : (
-            <figure className="flex min-w-0 justify-center lg:-mr-4">
-              <div className="relative">
-                <Image
-                  className="block h-auto max-h-[650px] w-auto max-w-full object-contain mix-blend-lighten"
-                  src="/process-launch-reference-ru-v3.png"
-                  alt="Ракета запускается из окна веб-приложения с надписью «От концепта до запуска»."
-                  width={1122}
-                  height={1402}
-                  unoptimized
-                  decoding="async"
-                />
-              </div>
+            <figure className="flex h-full min-w-0 items-center justify-center lg:-mr-6">
+              <Image
+                className="block h-auto max-h-full w-auto max-w-none object-contain mix-blend-lighten lg:max-h-[530px]"
+                src="/process-launch-rocket-wide-v1.png"
+                alt="Ракета запускается из окна веб-приложения."
+                width={1536}
+                height={1024}
+                unoptimized
+                decoding="async"
+              />
             </figure>
           )}
         </div>
