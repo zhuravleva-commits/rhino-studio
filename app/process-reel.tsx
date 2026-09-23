@@ -155,64 +155,17 @@ export function ProcessReel() {
               />
             </figure>
           ) : (
-            <div className="overflow-hidden rounded-[22px] border border-white/18 bg-[#f7f8fa] p-3 shadow-2xl shadow-black/30">
-              <div className="aspect-[16/10] overflow-hidden rounded-[15px] bg-[#101114] p-4 sm:p-5">
-                <div className="flex items-center justify-between border-b border-white/12 pb-3 text-[10px] font-bold uppercase tracking-[0.14em] text-white/45 sm:text-xs">
-                  <span>rhino / {step.label}</span>
-                  <span className="flex gap-1.5">
-                    <i className="size-2 rounded-full bg-white/24" />
-                    <i className="size-2 rounded-full bg-white/16" />
-                    <i className="size-2 rounded-full bg-white/10" />
-                  </span>
-                </div>
-
-                <div className="mt-4 h-[calc(100%-36px)]">
-                  <div className="flex h-full flex-col rounded-xl bg-white p-3 text-black sm:p-4">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-black/38 sm:text-[10px]">
-                          {step.label}
-                        </p>
-                        <h3 className="mt-1 text-base font-semibold sm:text-xl">
-                          {step.preview}
-                        </h3>
-                      </div>
-                      <span className="rounded-full bg-black px-2 py-1 text-[8px] font-bold text-white sm:px-3 sm:text-[10px]">
-                        {step.stat}
-                      </span>
-                    </div>
-
-                    <div className="mt-3 grid grid-cols-3 gap-2 sm:gap-3">
-                      {step.facts.map((fact, index) => (
-                        <div
-                          className="rounded-lg bg-black/[.055] p-2"
-                          key={fact}
-                        >
-                          <span className="block h-1.5 rounded-full bg-black/12">
-                            <i
-                              className="block h-full rounded-full bg-black transition-all duration-500"
-                              style={{ width: `${[72, 48, 88][index]}%` }}
-                            />
-                          </span>
-                          <span className="mt-2 block text-[8px] font-semibold leading-3 text-black/62 sm:text-[10px] sm:leading-4">
-                            {fact}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-2 rounded-lg bg-[#eaf1ff] p-2.5 sm:p-3">
-                      <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-[#6684bd] sm:text-[10px]">
-                        Результат
-                      </span>
-                      <p className="mt-1 text-[9px] font-medium leading-3 text-[#31517f] sm:text-[11px] sm:leading-4">
-                        {step.result}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <figure className="flex min-w-0 justify-center lg:-mr-4">
+              <Image
+                className="block h-auto max-h-[500px] w-auto max-w-full object-contain"
+                src="/process-launch-reference-ru-v2.png"
+                alt="Ракета запускается из окна веб-приложения с надписью «От концепта до запуска»."
+                width={1122}
+                height={1402}
+                unoptimized
+                decoding="async"
+              />
+            </figure>
           )}
         </div>
 
