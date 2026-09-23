@@ -156,15 +156,17 @@ export function ProcessReel() {
             </figure>
           ) : (
             <figure className="flex min-w-0 justify-center lg:-mr-4">
-              <Image
-                className="block h-auto max-h-[500px] w-auto max-w-full object-contain"
-                src="/process-launch-reference-ru-v2.png"
-                alt="Ракета запускается из окна веб-приложения с надписью «От концепта до запуска»."
-                width={1122}
-                height={1402}
-                unoptimized
-                decoding="async"
-              />
+              <div className="relative">
+                <Image
+                  className="block h-auto max-h-[650px] w-auto max-w-full object-contain mix-blend-lighten"
+                  src="/process-launch-reference-ru-v3.png"
+                  alt="Ракета запускается из окна веб-приложения с надписью «От концепта до запуска»."
+                  width={1122}
+                  height={1402}
+                  unoptimized
+                  decoding="async"
+                />
+              </div>
             </figure>
           )}
         </div>
