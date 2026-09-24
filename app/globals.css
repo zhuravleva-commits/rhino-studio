@@ -10,7 +10,6 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
-  --font-display: var(--font-michroma);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -170,8 +169,271 @@ body {
 }
 
 ::selection {
-  background: #000;
+  background: #0a64ff;
   color: #fff;
+}
+
+/* Точный десктопный макет из утверждённого концепта. Изображение остаётся
+   пиксель-в-пиксель, а прозрачные ссылки поверх него сохраняют навигацию. */
+.reference-hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+
+.reference-hero__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.reference-hero__hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+/* Имя студии набирается побуквенно и повторяется по кругу: буква уходит вверх
+   и тут же приходит снизу, как в барабане. Вместо clip-path — обрезка обёрткой
+   и сдвиг картинки: так движение остаётся на одном дешёвом свойстве и не
+   дёргается на смене формы среза.
+   Буквы нарезаны из арта по просветам между ними, поэтому «I» не ждёт столько
+   же, сколько «O», а сдвиг по очереди не даёт имени пропасть целиком: пока
+   первая собирается заново, последняя ещё стоит. */
+.hero-type {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Закрывает нарисованное в арте имя: столбцы протянуты от чистой полосы выше,
+   поэтому вертикальные линии сетки под текстом продолжаются как ни в чём не бывало. */
+.hero-type__patch {
+  position: absolute;
+  top: 31.944%;
+  left: 3.125%;
+  width: 37.5%;
+  height: auto;
+}
+
+.hero-type__row {
+  position: absolute;
+}
+
+.hero-type__row--l1 {
+  top: 32.269%;
+  left: 3.594%;
+  width: 31.745%;
+}
+
+.hero-type__row--l2 {
+  top: 47.593%;
+  left: 3.411%;
+  width: 36.094%;
+}
+
+.hero-type__letter {
+  position: absolute;
+  top: 0;
+  display: block;
+  overflow: hidden;
+}
+
+.hero-type__letter img {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: hero-letter-roll 6400ms linear calc(var(--i) * 60ms) infinite both;
+}
+
+@keyframes hero-letter-roll {
+  /* приходит снизу */
+  0% {
+    transform: translateY(100%);
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* стоит на месте почти весь круг */
+  10%,
+  90% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.64, 0, 0.78, 0);
+  }
+
+  /* уходит вверх, освобождая место следующему кругу */
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* Карточки арта, оживающие по наведению. Лежат поверх своих мест в картинке
+   и в покое совпадают с ней пиксель в пиксель, поэтому подмены не видно.
+   Масштаб чуть больше единицы: увеличенная копия перекрывает и оригинал,
+   и его тень, так что фон под ней дорисовывать не пришлось. */
+.reference-card {
+  position: absolute;
+  transform-origin: center;
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.reference-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Повторяет скругление карточки в арте: в исходнике это 24px при ширине
+     кадра 3840, то есть чуть больше половины процента его ширины. */
+  border-radius: clamp(5px, 0.62vw, 24px);
+}
+
+.reference-card:hover {
+  transform: scale(1.045);
+  filter: drop-shadow(0 26px 54px rgb(16 34 70 / 20%));
+}
+
+/* Большое окно заодно чуть отъезжает влево — от соседей, а не на них. */
+.reference-card--main:hover {
+  transform: translateX(-1.4%) scale(1.045);
+}
+
+/* Диаграмма по наведению всплывает над большим окном: в покое её левый
+   верхний угол им закрыт, и без этого росла бы только видимая часть. */
+.reference-card--chart:hover {
+  z-index: 5;
+}
+
+/* Большое окно лежит выше диаграммы — так же, как в самом арте. */
+.reference-card--main {
+  top: 22.917%;
+  left: 44.766%;
+  z-index: 4;
+  width: 39.74%;
+}
+
+.reference-card--chart {
+  top: 57.824%;
+  left: 79.609%;
+  z-index: 3;
+  width: 14.609%;
+}
+
+.reference-hotspot {
+  position: absolute;
+  display: block;
+  border-radius: 999px;
+  outline-offset: 4px;
+}
+
+.reference-hotspot:focus-visible {
+  outline: 3px solid #0a64ff;
+}
+
+.reference-hotspot--logo {
+  top: 3.2%;
+  left: 3.45%;
+  width: 8.1%;
+  height: 5.4%;
+}
+
+.reference-hotspot--services { top: 4%; left: 56.7%; width: 4.5%; height: 5%; }
+.reference-hotspot--works { top: 4%; left: 62%; width: 4.5%; height: 5%; }
+.reference-hotspot--process { top: 4%; left: 67.7%; width: 5.7%; height: 5%; }
+.reference-hotspot--contacts { top: 4%; left: 74.2%; width: 5.5%; height: 5%; }
+.reference-hotspot--top-cta { top: 2.8%; left: 82%; width: 14.3%; height: 6.8%; }
+.reference-hotspot--main-cta { top: 72.2%; left: 3.5%; width: 18.8%; height: 8.6%; }
+
+.reference-hero-mobile {
+  display: none;
+}
+
+@media (width < 720px) {
+  .reference-hero__image,
+  .reference-hero__hotspots,
+  .reference-card,
+  .hero-type {
+    display: none;
+  }
+
+  .reference-hero-mobile {
+    display: block;
+    min-height: 100svh;
+    padding: 24px 20px 42px;
+    background:
+      linear-gradient(90deg, rgb(20 31 50 / 6%) 1px, transparent 1px),
+      #fff;
+    background-size: 50% 100%;
+  }
+
+  .reference-hero-mobile__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .reference-hero-mobile__nav span {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+  }
+
+  .reference-hero-mobile__nav a,
+  .reference-hero-mobile__cta {
+    border-radius: 999px;
+    background: #0a64ff;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .reference-hero-mobile__nav a {
+    padding: 13px 18px;
+    font-size: 13px;
+  }
+
+  .reference-hero-mobile__eyebrow {
+    margin-top: 74px;
+    color: #767d89;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+  }
+
+  .reference-hero-mobile h2 {
+    margin-top: 24px;
+    font-size: clamp(66px, 21vw, 92px);
+    font-weight: 850;
+    line-height: 0.81;
+    letter-spacing: -0.075em;
+  }
+
+  .reference-hero-mobile > p:not(.reference-hero-mobile__eyebrow) {
+    margin-top: 24px;
+    color: #6f7681;
+    font-size: 20px;
+    letter-spacing: -0.03em;
+  }
+
+  .reference-hero-mobile__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+    margin-top: 26px;
+    padding: 18px 22px;
+  }
+
+  .reference-hero-mobile > img {
+    width: 138%;
+    max-width: none;
+    margin-top: 42px;
+    margin-left: 5%;
+    border: 1px solid #bac2cd;
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgb(16 34 70 / 16%);
+  }
 }
 
 .hero-reveal {
@@ -186,169 +448,183 @@ body {
   box-shadow: 0 18px 56px rgb(0 0 0 / 10%);
 }
 
-/* Сцена героя: трава впереди, имя выезжает из-за неё. Клип обрезает буквы по
-   низу строки, поэтому до выхода их не видно между лезвиями. */
-/* Кегль имени задан здесь, а не на самом заголовке: от него в em считаются
-   и высота травы, и её перекрытие с буквами. */
-.hn-stage {
-  position: relative;
-  font-size: clamp(40px, 8.4vw, 120px);
-  /* Резерв под траву: ровно столько, чтобы заросли уложились над подписью. */
-  padding-bottom: 1.7em;
+/* Герой: каркас страницы собирается сам за 5 с и растворяется. Проценты в
+   кейфреймах — это доли тех же 5 с, поэтому все элементы идут одним циклом;
+   разложить их через animation-delay нельзя — задержка рассинхронизирует петлю. */
+.hero-wireframe {
+  --hw-dur: 5s;
 }
 
-.hn-clip {
-  overflow: hidden;
-  padding-bottom: 0.06em;
+.hw-frame {
+  stroke-dasharray: 1;
+  animation: hw-frame var(--hw-dur) linear infinite;
 }
 
-/* Полоса стоит по низу строки и перекрывает буквы примерно на треть их высоты.
-   Высота не задаётся: ширина 100%, остальное по собственным пропорциям кадра —
-   иначе лезвия сплющит. Снизу у сцены резерв, чтобы трава не легла на подпись. */
-.hero-grass {
-  position: absolute;
-  inset-inline: 0;
-  /* Отсчёт от низа сцены, а не от верха: на узком экране имя переносится
-     в две строки, и привязка к верху увела бы траву на первую строку.
-     1.7em — нижний резерв сцены, 0.34em — перекрытие с буквами. */
-  top: calc(100% - 2.1em);
-  width: 100%;
-  /* Высота задана от кегля имени, а не пропорциями кадра: кадр ролика — 21:9,
-     и если пустить его во всю высоту, трава выйдет вчетверо выше букв и
-     завалит всю сцену. Здесь видна только верхняя часть зарослей. */
-  height: 2em;
-  overflow: hidden;
-  pointer-events: none;
-  /* Низ растворяем — иначе видна прямая линия, по которой обрезан кадр.
-     Растворение длинное и в несколько ступеней: трава к низу превращается
-     в сплошную массу, и короткий градиент читался бы на ней прямоугольной
-     полосой тумана. */
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    #000 30%,
-    rgb(0 0 0 / 82%) 52%,
-    rgb(0 0 0 / 42%) 76%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    #000 30%,
-    rgb(0 0 0 / 82%) 52%,
-    rgb(0 0 0 / 42%) 76%,
-    transparent 100%
-  );
-  transform-origin: 50% 100%;
-  animation: hg-grow 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.hero-grass-video {
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  width: 100%;
-  height: auto;
-  /* Верхушки травы в кадре начинаются не от края, а примерно на трети его
-     высоты. Этот сдвиг поднимает их к верху обёртки, поэтому перекрытие
-     с буквами не зависит от ширины экрана. */
-  transform: translateY(-35.4%);
-  transition: opacity 300ms linear;
-  /* Выбивает белый фон ролика, иначе видео закрыло бы буквы прямоугольником. */
-  filter: url(#hero-grass-key);
-}
-
-/* Выбивает белый фон ролика, иначе видео закрыло бы буквы прямоугольником. */
-.hero-grass-video {
-  filter: url(#hero-grass-key);
-}
-
-@keyframes hg-grow {
-  from {
-    clip-path: inset(100% 0 0 0);
-    transform: scaleY(0.9);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-    transform: none;
-  }
-}
-
-/* Имя: буквы выезжают из-за травы снизу вверх, затем в пропуск растёт рог. */
-.hn-letter {
-  display: inline-block;
-  animation: hn-letter 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(760ms + var(--i, 0) * 45ms);
-}
-
-@keyframes hn-letter {
-  from {
-    opacity: 0;
-    transform: translateY(0.9em);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* Пропуск под рог держит ширину с первого кадра, иначе буквы дёрнутся,
-   когда рог встанет на место. */
-.hn-slot {
-  position: relative;
-  display: inline-block;
-  width: 0.46em;
-  height: 0.84em;
-  flex-shrink: 0;
-  transform: translateY(-0.045em);
-}
-
-.hn-horn {
-  position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  /* Рог выезжает из-за травы тем же движением, что и буквы: когда он вместо
-     этого прорастал снизу вверх, он читался как отдельный трюк, а не как знак
-     в строке. Идёт по-прежнему последним, но сразу за последней буквой —
-     прежняя пауза в треть секунды выглядела провалом. */
-  animation: hn-horn 620ms cubic-bezier(0.22, 1, 0.36, 1) 1330ms both;
-}
-
-@keyframes hn-horn {
-  from {
-    opacity: 0;
-    transform: translateY(0.9em);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* Блик: узкая полоса проходит снизу вверх внутри контура рога. */
-.hn-glint {
-  animation: hn-glint 7s ease-in-out 3.4s infinite;
-}
-
-@keyframes hn-glint {
+@keyframes hw-frame {
   0% {
+    stroke-dashoffset: 1;
+    opacity: 1;
+  }
+  12%,
+  84% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
     opacity: 0;
-    transform: translateY(96px);
   }
-  4% {
+}
+
+.hw-chrome,
+.hw-headline,
+.hw-text,
+.hw-button,
+.hw-card {
+  opacity: 0;
+}
+
+.hw-chrome {
+  animation: hw-chrome var(--hw-dur) ease infinite;
+}
+
+@keyframes hw-chrome {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  22%,
+  84% {
     opacity: 1;
+    transform: none;
   }
-  20% {
-    opacity: 1;
-    transform: translateY(-38px);
-  }
-  24%,
   100% {
     opacity: 0;
-    transform: translateY(-38px);
   }
 }
 
+.hw-headline {
+  animation: hw-headline var(--hw-dur) ease infinite;
+}
+
+@keyframes hw-headline {
+  0%,
+  24% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  32%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hw-text {
+  animation: hw-text var(--hw-dur) ease infinite;
+}
+
+@keyframes hw-text {
+  0%,
+  32% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  42%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hw-button {
+  animation: hw-button var(--hw-dur) cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  transform-box: fill-box;
+  transform-origin: left center;
+}
+
+@keyframes hw-button {
+  0%,
+  42% {
+    opacity: 0;
+    transform: scaleX(0.4);
+  }
+  52%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hw-card-1 {
+  animation: hw-card-1 var(--hw-dur) ease infinite;
+}
+
+.hw-card-2 {
+  animation: hw-card-2 var(--hw-dur) ease infinite;
+}
+
+.hw-card-3 {
+  animation: hw-card-3 var(--hw-dur) ease infinite;
+}
+
+@keyframes hw-card-1 {
+  0%,
+  54% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  62%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hw-card-2 {
+  0%,
+  58% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  66%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hw-card-3 {
+  0%,
+  62% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  70%,
+  84% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 
 
 /* Кадр ролика подгоняется под статичную иконку: высота задаётся в долях
@@ -599,10 +875,12 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .hero-reveal,
   .hero-strip,
-  .hn-letter,
-  .hn-horn,
-  .hn-glint,
-  .hero-grass,
+  .hw-frame,
+  .hw-chrome,
+  .hw-headline,
+  .hw-text,
+  .hw-button,
+  .hw-card,
   .intro-film-sweep,
   .intro-film-screen,
   .intro-film-ui,
@@ -617,6 +895,19 @@ body {
   .portfolio-card:nth-child(even) {
     margin-top: 0;
   }
+
+  .hw-chrome,
+  .hw-headline,
+  .hw-text,
+  .hw-button,
+  .hw-card {
+    opacity: 1;
+  }
+
+  .hw-frame {
+    stroke-dasharray: none;
+  }
+
   * {
     scroll-behavior: auto;
   }
@@ -625,5 +916,21 @@ body {
 @media (width < 768px) {
   .portfolio-card:nth-child(even) {
     margin-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reference-card {
+    transition: filter 280ms linear;
+  }
+
+  .reference-card:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-type__letter img {
+    animation: none;
   }
 }

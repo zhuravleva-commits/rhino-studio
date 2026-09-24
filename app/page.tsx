@@ -1,15 +1,11 @@
-import { HeroGrass } from './hero-grass';
-import { HeroName } from './hero-name';
-import { PortfolioCard } from './portfolio-card';
-import { ProcessReel } from './process-reel';
-import { ServiceCard } from './service-card';
+import type { CSSProperties } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-const navItems = [
-  { label: 'Услуги', href: '#services' },
-  { label: 'Работы', href: '#portfolio' },
-  { label: 'Процесс' },
-  { label: 'Контакты' },
-];
+import { NAME_ROWS } from './name-data';
+import { PortfolioCard } from './portfolio-card';
+import { ServiceCard } from './service-card';
+import { ProcessReel } from './process-reel';
 
 const services = [
   {
@@ -63,11 +59,11 @@ const portfolioItems = [
     video: '/portfolio-real-estate-hover.mp4',
   },
   {
-    type: 'Маркетплейс',
-    title: 'Поиск попутчиков',
-    note: 'маршруты, бронирование и сценарии водителя',
-    image: '/portfolio-rideshare-light.png',
-    video: '/portfolio-rideshare-hover.mp4',
+    type: 'Веб-приложение',
+    title: 'CRM для сервисной компании',
+    note: 'заявки, диспетчеризация и контроль показателей',
+    image: '/portfolio-crm-dark.png',
+    video: '/portfolio-crm-hover.mp4',
   },
   {
     type: 'Мобильное приложение',
@@ -81,77 +77,82 @@ const portfolioItems = [
 export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <header className="fixed inset-x-0 top-0 z-50 bg-background/92 backdrop-blur-xl">
-        <nav
-          aria-label="Основная навигация"
-          className="mx-auto flex h-[88px] max-w-[1360px] items-center justify-between px-5 sm:px-8 lg:px-12"
-        >
-          <a
-            href="/"
-            className="inline-flex items-end text-[28px] font-black leading-none tracking-[-0.065em] transition-opacity hover:opacity-60"
-            aria-label="Rhino Studio"
-          >
-            RH
-            <span className="relative inline-block h-[0.82em] w-[0.36em] shrink-0 -translate-y-[0.055em]" aria-hidden="true">
-              <svg
-                className="absolute inset-x-0 bottom-0 h-full w-full"
-                viewBox="0 0 44 92"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M36 92C35 57 27 25 6 4C13 30 15 61 13 92H36Z" fill="currentColor" />
-              </svg>
-            </span>
-            NO
-          </a>
+      <section className="reference-hero" aria-labelledby="reference-hero-title">
+        <Image
+          alt="Первый экран Rhino Studio в редакционном стиле"
+          className="reference-hero__image"
+          height="2160"
+          priority
+          src="/rhino-editorial-hero-4k.png"
+          width="3840"
+        />
 
-          <div className="flex items-center gap-3 sm:gap-8">
-            <div className="hidden items-center gap-8 text-[16px] font-medium text-foreground md:flex">
-              {navItems.map((item) =>
-                item.href ? (
-                  <a
-                    className="transition-opacity hover:opacity-55"
-                    href={item.href}
-                    key={item.label}
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <span className="text-muted-foreground" key={item.label}>
-                    {item.label}
-                  </span>
-                ),
-              )}
+        {/* Имя студии проявляется при загрузке. В арте оно нарисовано, поэтому
+            поверх кладётся заплатка фона (её столбцы протянуты от чистой полосы
+            выше, так что линии сетки продолжаются), а на неё — буквы, нарезанные
+            из того же арта. Каждая выезжает из-под собственной верхней кромки
+            со сдвигом по очереди. */}
+        <div aria-hidden="true" className="hero-type">
+          <Image alt="" className="hero-type__patch" height="670" src="/hero-name-patch.png" unoptimized width="1440" />
+
+          {NAME_ROWS.map((row) => (
+            <div className={`hero-type__row hero-type__row--${row.key}`} key={row.key}>
+              {row.letters.map((letter) => (
+                <span
+                  className="hero-type__letter"
+                  key={letter.i}
+                  style={
+                    {
+                      '--i': letter.i,
+                      left: `${letter.left}%`,
+                      width: `${letter.width}%`,
+                    } as CSSProperties
+                  }
+                >
+                  <Image alt="" height={letter.h} src={letter.src} unoptimized width={letter.w} />
+                </span>
+              ))}
             </div>
+          ))}
+        </div>
 
-            <a
-              className="group inline-flex h-[52px] items-center gap-2 rounded-full bg-foreground px-6 text-[16px] font-bold text-background transition-transform duration-300 hover:-translate-y-0.5 sm:px-8"
-              href="mailto:hello@rhino.studio"
-            >
-              Обсудить
-              <span
-                className="text-xl leading-none transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden="true"
-              >
-                ↗
-              </span>
-            </a>
-          </div>
+        {/* Две карточки арта, вырезанные из того же файла и положенные точно
+            поверх своих мест: пока на них не навели, они неотличимы от
+            картинки под ними. По наведению карточка подрастает — увеличенная
+            копия сама перекрывает оригинал, поэтому дорисовывать фон под ней
+            не нужно. Диаграмма намеренно ниже большого окна: её левый верхний
+            угол в арте уходит под него, и всплыви она выше — в вырезе стал бы
+            виден кусок соседнего окна. */}
+        <div aria-hidden="true" className="reference-card reference-card--chart">
+          <Image alt="" height="566" src="/hero-card-chart.png" unoptimized width="561" />
+        </div>
+
+        <div aria-hidden="true" className="reference-card reference-card--main">
+          <Image alt="" height="1119" src="/hero-card-main.png" unoptimized width="1526" />
+        </div>
+
+        <h1 className="sr-only" id="reference-hero-title">Rhino Studio — создаём сайты, которые продают</h1>
+
+        <nav aria-label="Основная навигация" className="reference-hero__hotspots">
+          <Link aria-label="Rhino Studio — на главную" className="reference-hotspot reference-hotspot--logo" href="/" />
+          <a aria-label="Услуги" className="reference-hotspot reference-hotspot--services" href="#services" />
+          <a aria-label="Работы" className="reference-hotspot reference-hotspot--works" href="#portfolio" />
+          <a aria-label="Процесс" className="reference-hotspot reference-hotspot--process" href="#process" />
+          <a aria-label="Контакты" className="reference-hotspot reference-hotspot--contacts" href="mailto:hello@rhino.studio" />
+          <a aria-label="Обсудить проект" className="reference-hotspot reference-hotspot--top-cta" href="mailto:hello@rhino.studio" />
+          <a aria-label="Обсудить проект" className="reference-hotspot reference-hotspot--main-cta" href="mailto:hello@rhino.studio" />
         </nav>
-      </header>
 
-      <section className="mx-auto flex min-h-svh max-w-[1360px] flex-col justify-center px-5 pb-24 pt-[136px] sm:px-8 sm:pt-[152px] lg:px-12">
-        <div className="hero-reveal">
-          <div className="hn-stage">
-            <div className="hn-clip">
-              <HeroName />
-            </div>
-            <HeroGrass />
+        <div className="reference-hero-mobile">
+          <div className="reference-hero-mobile__nav">
+            <span>RHINO</span>
+            <a href="mailto:hello@rhino.studio">Обсудить ↗</a>
           </div>
-
-          <p className="mx-auto mt-10 max-w-2xl text-center text-xl leading-8 text-muted-foreground sm:text-2xl sm:leading-9">
-            Создаём сайты, которые продают.
-          </p>
+          <p className="reference-hero-mobile__eyebrow">СТРАТЕГИЯ · ДИЗАЙН · РАЗРАБОТКА</p>
+          <h2>RHINO<br />STUDIO</h2>
+          <p>Создаём сайты, которые продают.</p>
+          <a className="reference-hero-mobile__cta" href="mailto:hello@rhino.studio">Обсудить проект <span>↗</span></a>
+          <Image alt="Превью цифрового продукта Rhino Studio" height="2160" src="/rhino-editorial-hero-4k.png" width="3840" />
         </div>
       </section>
 
