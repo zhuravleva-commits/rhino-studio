@@ -1,7 +1,10 @@
+import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { NAME_ROWS } from './name-data';
 import { PortfolioCard } from './portfolio-card';
+import { PricingSection } from './pricing-section';
 import { ServiceCard } from './service-card';
 import { ProcessReel } from './process-reel';
 
@@ -74,7 +77,25 @@ const portfolioItems = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-background text-foreground" id="top">
+      <header className="site-header">
+        <Link aria-label="Rhino Studio — на главную" className="site-header__logo" href="/#top">
+          RHINO
+        </Link>
+
+        <nav aria-label="Основная навигация" className="site-header__nav">
+          <a href="#services">Услуги</a>
+          <a href="#pricing">Цены</a>
+          <a href="#portfolio">Работы</a>
+          <a href="#process">Процесс</a>
+          <a href="mailto:hello@rhino.studio">Контакты</a>
+        </nav>
+
+        <a className="site-header__cta" href="mailto:hello@rhino.studio">
+          Обсудить проект <span aria-hidden="true">↗</span>
+        </a>
+      </header>
+
       <section className="reference-hero" aria-labelledby="reference-hero-title">
         <Image
           alt="Первый экран Rhino Studio в редакционном стиле"
@@ -85,23 +106,57 @@ export default function Home() {
           width="3840"
         />
 
+        {/* Имя студии проявляется при загрузке. В арте оно нарисовано, поэтому
+            поверх кладётся заплатка фона (её столбцы протянуты от чистой полосы
+            выше, так что линии сетки продолжаются), а на неё — буквы, нарезанные
+            из того же арта. Каждая выезжает из-под собственной верхней кромки
+            со сдвигом по очереди. */}
+        <div aria-hidden="true" className="hero-type">
+          <Image alt="" className="hero-type__patch" height="670" src="/hero-name-patch.png" unoptimized width="1440" />
+
+          {NAME_ROWS.map((row) => (
+            <div className={`hero-type__row hero-type__row--${row.key}`} key={row.key}>
+              {row.letters.map((letter) => (
+                <span
+                  className="hero-type__letter"
+                  key={letter.i}
+                  style={
+                    {
+                      '--i': letter.i,
+                      left: `${letter.left}%`,
+                      width: `${letter.width}%`,
+                    } as CSSProperties
+                  }
+                >
+                  <Image alt="" height={letter.h} src={letter.src} unoptimized width={letter.w} />
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Две карточки арта, вырезанные из того же файла и положенные точно
+            поверх своих мест: пока на них не навели, они неотличимы от
+            картинки под ними. По наведению карточка подрастает — увеличенная
+            копия сама перекрывает оригинал, поэтому дорисовывать фон под ней
+            не нужно. Диаграмма намеренно ниже большого окна: её левый верхний
+            угол в арте уходит под него, и всплыви она выше — в вырезе стал бы
+            виден кусок соседнего окна. */}
+        <div aria-hidden="true" className="reference-card reference-card--chart">
+          <Image alt="" height="566" src="/hero-card-chart.png" unoptimized width="561" />
+        </div>
+
+        <div aria-hidden="true" className="reference-card reference-card--main">
+          <Image alt="" height="1119" src="/hero-card-main.png" unoptimized width="1526" />
+        </div>
+
         <h1 className="sr-only" id="reference-hero-title">Rhino Studio — создаём сайты, которые продают</h1>
 
-        <nav aria-label="Основная навигация" className="reference-hero__hotspots">
-          <Link aria-label="Rhino Studio — на главную" className="reference-hotspot reference-hotspot--logo" href="/" />
-          <a aria-label="Услуги" className="reference-hotspot reference-hotspot--services" href="#services" />
-          <a aria-label="Работы" className="reference-hotspot reference-hotspot--works" href="#portfolio" />
-          <a aria-label="Процесс" className="reference-hotspot reference-hotspot--process" href="#process" />
-          <a aria-label="Контакты" className="reference-hotspot reference-hotspot--contacts" href="mailto:hello@rhino.studio" />
-          <a aria-label="Обсудить проект" className="reference-hotspot reference-hotspot--top-cta" href="mailto:hello@rhino.studio" />
+        <nav aria-label="Действия первого экрана" className="reference-hero__hotspots">
           <a aria-label="Обсудить проект" className="reference-hotspot reference-hotspot--main-cta" href="mailto:hello@rhino.studio" />
         </nav>
 
         <div className="reference-hero-mobile">
-          <div className="reference-hero-mobile__nav">
-            <span>RHINO</span>
-            <a href="mailto:hello@rhino.studio">Обсудить ↗</a>
-          </div>
           <p className="reference-hero-mobile__eyebrow">СТРАТЕГИЯ · ДИЗАЙН · РАЗРАБОТКА</p>
           <h2>RHINO<br />STUDIO</h2>
           <p>Создаём сайты, которые продают.</p>
@@ -139,6 +194,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <PricingSection />
 
       <ProcessReel />
 
