@@ -79,7 +79,11 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground" id="top">
       <header className="site-header">
-        <Link aria-label="Rhino Studio — на главную" className="site-header__logo" href="/#top">
+        <Link
+          aria-label="Rhino Studio — на главную"
+          className="site-header__logo"
+          href="/#top"
+        >
           RHINO
         </Link>
 
@@ -96,7 +100,10 @@ export default function Home() {
         </a>
       </header>
 
-      <section className="reference-hero" aria-labelledby="reference-hero-title">
+      <section
+        className="reference-hero"
+        aria-labelledby="reference-hero-title"
+      >
         <Image
           alt="Первый экран Rhino Studio в редакционном стиле"
           className="reference-hero__image"
@@ -112,10 +119,20 @@ export default function Home() {
             из того же арта. Каждая выезжает из-под собственной верхней кромки
             со сдвигом по очереди. */}
         <div aria-hidden="true" className="hero-type">
-          <Image alt="" className="hero-type__patch" height="670" src="/hero-name-patch.png" unoptimized width="1440" />
+          <Image
+            alt=""
+            className="hero-type__patch"
+            height="670"
+            src="/hero-name-patch.png"
+            unoptimized
+            width="1440"
+          />
 
           {NAME_ROWS.map((row) => (
-            <div className={`hero-type__row hero-type__row--${row.key}`} key={row.key}>
+            <div
+              className={`hero-type__row hero-type__row--${row.key}`}
+              key={row.key}
+            >
               {row.letters.map((letter) => (
                 <span
                   className="hero-type__letter"
@@ -128,7 +145,13 @@ export default function Home() {
                     } as CSSProperties
                   }
                 >
-                  <Image alt="" height={letter.h} src={letter.src} unoptimized width={letter.w} />
+                  <Image
+                    alt=""
+                    height={letter.h}
+                    src={letter.src}
+                    unoptimized
+                    width={letter.w}
+                  />
                 </span>
               ))}
             </div>
@@ -142,26 +165,66 @@ export default function Home() {
             не нужно. Диаграмма намеренно ниже большого окна: её левый верхний
             угол в арте уходит под него, и всплыви она выше — в вырезе стал бы
             виден кусок соседнего окна. */}
-        <div aria-hidden="true" className="reference-card reference-card--chart">
-          <Image alt="" height="566" src="/hero-card-chart.png" unoptimized width="561" />
+        <div
+          aria-hidden="true"
+          className="reference-card reference-card--chart"
+        >
+          <Image
+            alt=""
+            height="566"
+            src="/hero-card-chart.png"
+            unoptimized
+            width="561"
+          />
         </div>
 
         <div aria-hidden="true" className="reference-card reference-card--main">
-          <Image alt="" height="1119" src="/hero-card-main.png" unoptimized width="1526" />
+          <Image
+            alt=""
+            height="1119"
+            src="/hero-card-main.png"
+            unoptimized
+            width="1526"
+          />
         </div>
 
-        <h1 className="sr-only" id="reference-hero-title">Rhino Studio — создаём сайты, которые продают</h1>
+        <h1 className="sr-only" id="reference-hero-title">
+          Rhino Studio — создаём сайты, которые продают
+        </h1>
 
-        <nav aria-label="Действия первого экрана" className="reference-hero__hotspots">
-          <a aria-label="Обсудить проект" className="reference-hotspot reference-hotspot--main-cta" href="mailto:hello@rhino.studio" />
+        <nav
+          aria-label="Действия первого экрана"
+          className="reference-hero__hotspots"
+        >
+          <a
+            aria-label="Обсудить проект"
+            className="reference-hotspot reference-hotspot--main-cta"
+            href="mailto:hello@rhino.studio"
+          />
         </nav>
 
         <div className="reference-hero-mobile">
-          <p className="reference-hero-mobile__eyebrow">СТРАТЕГИЯ · ДИЗАЙН · РАЗРАБОТКА</p>
-          <h2>RHINO<br />STUDIO</h2>
+          <p className="reference-hero-mobile__eyebrow">
+            СТРАТЕГИЯ · ДИЗАЙН · РАЗРАБОТКА
+          </p>
+          <h2>
+            RHINO
+            <br />
+            STUDIO
+          </h2>
           <p>Создаём сайты, которые продают.</p>
-          <a className="reference-hero-mobile__cta" href="mailto:hello@rhino.studio">Обсудить проект <span>↗</span></a>
-          <Image alt="Превью цифрового продукта Rhino Studio" height="2160" src="/rhino-editorial-hero-4k.png" width="3840" />
+          <a
+            className="reference-hero-mobile__cta"
+            href="mailto:hello@rhino.studio"
+          >
+            Обсудить проект <span>↗</span>
+          </a>
+          <Image
+            alt="Превью цифрового продукта Rhino Studio"
+            height="2160"
+            src="/rhino-editorial-hero-4k.png"
+            width="3840"
+          />
         </div>
       </section>
 
@@ -195,8 +258,6 @@ export default function Home() {
         </div>
       </section>
 
-      <PricingSection />
-
       <ProcessReel />
 
       <section
@@ -212,8 +273,8 @@ export default function Home() {
               Наши прошлые работы
             </h2>
             <p className="mt-8 max-w-3xl text-xl leading-8 text-foreground/58 sm:text-2xl">
-              Первые визуальные заготовки под будущие кейсы: без внешних
-              ссылок, но уже с понятной подачей продукта.
+              Первые визуальные заготовки под будущие кейсы: без внешних ссылок,
+              но уже с понятной подачей продукта.
             </p>
           </div>
 
@@ -224,6 +285,18 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <PricingSection />
+
+      <footer className="site-footer">
+        <div className="site-footer__inner">
+          <div className="site-footer__legal">
+            <Link href="/privacy">Политика обработки персональных данных</Link>
+            <p>© 2026 Arena Studio. Все права защищены.</p>
+          </div>
+          <div aria-hidden="true" className="site-footer__reserved" />
+        </div>
+      </footer>
     </main>
   );
 }
