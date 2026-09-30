@@ -2,6 +2,8 @@
 
 import { useRef, useState, type CSSProperties } from 'react';
 
+import { canPreloadHoverMedia, useNearViewport } from './use-near-viewport';
+
 type Service = {
   image: string;
   label: string;
@@ -23,8 +25,12 @@ type ServiceCardProps = {
 };
 
 export function ServiceCard({ index, service }: ServiceCardProps) {
+  const cardRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoActive, setIsVideoActive] = useState(false);
+  // Ролик начинает грузиться, когда карточка подъезжает к экрану, — тогда
+  // к первому наведению он уже готов и не заставляет ждать.
+  const isNear = useNearViewport(cardRef);
 
   const startVideo = () => {
     const video = videoRef.current;
@@ -70,6 +76,7 @@ export function ServiceCard({ index, service }: ServiceCardProps) {
       onFocus={startVideo}
       onPointerEnter={startVideo}
       onPointerLeave={stopVideo}
+      ref={cardRef}
       tabIndex={service.video ? 0 : undefined}
     >
       <div className="service-milky-background absolute inset-0" />
@@ -101,6 +108,7 @@ export function ServiceCard({ index, service }: ServiceCardProps) {
               className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-300 ${
                 isVideoActive ? 'opacity-0' : 'opacity-100'
               }`}
+              decoding="async"
               loading="lazy"
               src={service.image}
             />
@@ -126,7 +134,7 @@ export function ServiceCard({ index, service }: ServiceCardProps) {
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload={isNear ? (canPreloadHoverMedia() ? 'auto' : 'metadata') : 'none'}
                   ref={videoRef}
                   src={service.video}
                 />

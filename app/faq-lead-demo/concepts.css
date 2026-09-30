@@ -1,0 +1,833 @@
+/* Витрина концептов «FAQ + заявка» (страница /faq-lead-demo, временная).
+   Всё с префиксом fl-, чтобы не пересекаться с боевыми стилями. */
+
+.fl-page {
+  min-height: 100vh;
+  padding: 0 0 120px;
+  background: #f3f5f8;
+  color: #141f32;
+}
+
+.fl-page__head {
+  max-width: 1264px;
+  margin: 0 auto;
+  padding: 56px 20px 24px;
+}
+
+.fl-page__head p {
+  color: #98a1af;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fl-page__head h1 {
+  margin: 10px 0 22px;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.fl-page__head nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fl-page__head nav a {
+  padding: 8px 14px;
+  border: 1px solid #dfe3ea;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.fl-page__head nav a:hover {
+  border-color: #0a64ff;
+  color: #0a64ff;
+}
+
+.fl-concept {
+  max-width: 1264px;
+  margin: 48px auto 0;
+  padding: 0 20px;
+  scroll-margin-top: 24px;
+}
+
+.fl-concept__label {
+  max-width: 760px;
+  margin-bottom: 16px;
+}
+
+.fl-concept__label h3 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.fl-concept__label p {
+  margin-top: 6px;
+  color: #5d6675;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* ── Раскладка: две половины ───────────────────────────────────────────── */
+
+.fl-split {
+  display: grid;
+  align-items: start;
+  padding: 72px 64px 80px;
+  border-radius: 32px;
+  background: #fff;
+  gap: 64px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.fl-split__right {
+  position: sticky;
+  top: 24px;
+}
+
+.fl-split__title {
+  margin-bottom: 30px;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+
+.fl-split--dark {
+  background: #0e1728;
+  color: #fff;
+}
+
+/* ── Аккордеон ─────────────────────────────────────────────────────────── */
+
+.fl-faq__item {
+  border-top: 1px solid #e7eaef;
+}
+
+.fl-faq__item:last-child {
+  border-bottom: 1px solid #e7eaef;
+}
+
+.fl-faq__q {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  gap: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fl-faq__num {
+  flex: 0 0 28px;
+  color: #b7bfcb;
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.fl-faq__text {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  transition: color 200ms linear;
+}
+
+.fl-faq__q:hover .fl-faq__text,
+.fl-faq__item.is-open .fl-faq__text,
+.fl-faq__item.is-open .fl-faq__num {
+  color: #0a64ff;
+}
+
+.fl-faq__sign {
+  position: relative;
+  flex: 0 0 20px;
+  height: 20px;
+}
+
+.fl-faq__sign::before,
+.fl-faq__sign::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  background: currentColor;
+  content: '';
+  transform: translate(-50%, -50%);
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fl-faq__sign::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.fl-faq__item.is-open .fl-faq__sign {
+  color: #0a64ff;
+}
+
+.fl-faq__item.is-open .fl-faq__sign::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.fl-faq__a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fl-faq__a > div {
+  overflow: hidden;
+}
+
+.fl-faq__item.is-open .fl-faq__a {
+  grid-template-rows: 1fr;
+}
+
+.fl-faq__a p {
+  padding: 0 36px 22px 0;
+  color: #5d6675;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.fl-split--dark .fl-faq__item,
+.fl-split--dark .fl-faq__item:last-child {
+  border-color: rgb(255 255 255 / 12%);
+}
+
+.fl-split--dark .fl-faq__a p {
+  color: rgb(255 255 255 / 60%);
+}
+
+.fl-split--dark .fl-faq__num {
+  color: rgb(255 255 255 / 30%);
+}
+
+.fl-split--dark .fl-faq__q:hover .fl-faq__text,
+.fl-split--dark .fl-faq__item.is-open .fl-faq__text,
+.fl-split--dark .fl-faq__item.is-open .fl-faq__num,
+.fl-split--dark .fl-faq__item.is-open .fl-faq__sign {
+  color: #5c9dff;
+}
+
+/* С номерами ответ выравниваем по тексту вопроса, а не по номеру */
+.fl-concept--dark .fl-faq__a p,
+.fl-concept--letter .fl-faq__a p {
+  padding-left: 44px;
+}
+
+/* ── Общие элементы формы ──────────────────────────────────────────────── */
+
+.fl-split input,
+.fl-split textarea {
+  width: 100%;
+  min-width: 0;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+}
+
+.fl-split input:focus,
+.fl-split textarea:focus {
+  outline: none;
+}
+
+.fl-split textarea {
+  resize: vertical;
+}
+
+.fl-submit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 18px;
+  padding: 17px 22px;
+  border-radius: 999px;
+  background: #0a64ff;
+  color: #fff;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 200ms linear, transform 200ms ease;
+}
+
+.fl-submit:hover {
+  background: #0a55d8;
+  transform: translateY(-1px);
+}
+
+.fl-submit--dark {
+  background: #141f32;
+}
+
+.fl-submit--dark:hover {
+  background: #000;
+}
+
+.fl-consent {
+  margin-top: 10px;
+  color: #a6aeba;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.fl-done {
+  padding: 24px 0;
+}
+
+.fl-done__title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.fl-done__text {
+  margin: 8px 0 18px;
+  opacity: 0.7;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.fl-link {
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.fl-icon {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+}
+
+.fl-icon--telegram circle { fill: #27a7e7; }
+.fl-icon--whatsapp circle { fill: #25d366; }
+.fl-icon--vk rect { fill: #0077ff; }
+.fl-icon--max rect { fill: #6a3cf5; }
+
+/* Капсулы мессенджеров */
+.fl-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fl-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px 8px 9px;
+  border: 1px solid #dfe3ea;
+  border-radius: 999px;
+  background: #fff;
+  color: #141f32;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+  cursor: pointer;
+  transition: border-color 160ms linear, background 160ms linear, color 160ms linear;
+}
+
+.fl-pill:hover {
+  border-color: #0a64ff;
+}
+
+.fl-pills--light .fl-pill.is-on {
+  border-color: #0a64ff;
+  background: #eef3ff;
+  color: #0a64ff;
+  box-shadow: inset 0 0 0 1px #0a64ff;
+}
+
+.fl-pills--blue .fl-pill {
+  border-color: rgb(255 255 255 / 35%);
+  background: none;
+  color: #fff;
+}
+
+.fl-pills--blue .fl-pill:hover {
+  border-color: #fff;
+}
+
+.fl-pills--blue .fl-pill.is-on {
+  border-color: #fff;
+  background: #fff;
+  color: #0a64ff;
+}
+
+.fl-pills--dark .fl-pill {
+  border-color: rgb(255 255 255 / 16%);
+  background: rgb(255 255 255 / 4%);
+  color: #fff;
+}
+
+.fl-pills--dark {
+  gap: 6px;
+}
+
+.fl-pills--dark .fl-pill {
+  padding: 7px 11px 7px 7px;
+  font-size: 13px;
+  gap: 6px;
+}
+
+.fl-pills--dark .fl-pill.is-on {
+  border-color: #5c9dff;
+  background: rgb(92 157 255 / 16%);
+}
+
+/* ── 1. Светлая карточка ───────────────────────────────────────────────── */
+
+.fl-card,
+.fl-tiles-card {
+  padding: 32px;
+  border: 1px solid #e3e7ee;
+  border-radius: 28px;
+  background: #fafbfc;
+}
+
+.fl-card__title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.fl-card__sub {
+  margin: 8px 0 24px;
+  color: #5d6675;
+  font-size: 15px;
+}
+
+.fl-field {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.fl-field > span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fl-field em,
+.fl-add em,
+.fl-step em {
+  margin-left: 6px;
+  color: #a6aeba;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.fl-card input,
+.fl-card textarea,
+.fl-tiles-card input,
+.fl-tiles-card textarea {
+  padding: 13px 18px;
+  border: 1px solid #dfe3ea;
+  border-radius: 16px;
+  background: #fff;
+  transition: border-color 180ms linear, box-shadow 180ms linear;
+}
+
+.fl-card input,
+.fl-tiles-card input {
+  border-radius: 999px;
+}
+
+.fl-card input:focus,
+.fl-card textarea:focus,
+.fl-tiles-card input:focus,
+.fl-tiles-card textarea:focus {
+  border-color: #0a64ff;
+  box-shadow: 0 0 0 3px rgb(10 100 255 / 12%);
+}
+
+.fl-split ::placeholder {
+  color: #b7bfcb;
+}
+
+/* ── 2. Синяя панель ───────────────────────────────────────────────────── */
+
+.fl-blue {
+  padding: 36px;
+  border-radius: 32px;
+  background:
+    radial-gradient(120% 90% at 100% 0%, #3d86ff 0%, transparent 60%),
+    #0a64ff;
+  color: #fff;
+  box-shadow: 0 30px 60px -30px rgb(10 100 255 / 60%);
+}
+
+.fl-blue__eyebrow {
+  color: rgb(255 255 255 / 70%);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.fl-blue__title {
+  margin: 10px 0 26px;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.fl-blue__row {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.fl-blue input,
+.fl-blue textarea {
+  padding: 14px 18px;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 16px;
+  background: rgb(255 255 255 / 12%);
+  color: #fff;
+  transition: background 180ms linear, border-color 180ms linear;
+}
+
+.fl-blue input {
+  border-radius: 999px;
+}
+
+.fl-blue input:focus,
+.fl-blue textarea:focus {
+  border-color: #fff;
+  background: rgb(255 255 255 / 18%);
+}
+
+.fl-blue ::placeholder {
+  color: rgb(255 255 255 / 60%);
+}
+
+.fl-blue__label {
+  margin: 20px 0 10px;
+  color: rgb(255 255 255 / 75%);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fl-blue textarea {
+  margin-top: 20px;
+}
+
+.fl-blue .fl-consent {
+  color: rgb(255 255 255 / 55%);
+}
+
+/* ── 3. Сначала мессенджер ─────────────────────────────────────────────── */
+
+.fl-tiles {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.fl-tile {
+  --brand: #0a64ff;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #dfe3ea;
+  border-radius: 18px;
+  background: #fff;
+  color: #141f32;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  gap: 12px;
+  cursor: pointer;
+  transition: border-color 160ms linear, background 160ms linear, transform 160ms ease;
+}
+
+.fl-tile--telegram { --brand: #27a7e7; }
+.fl-tile--whatsapp { --brand: #25d366; }
+.fl-tile--max { --brand: #6a3cf5; }
+.fl-tile--vk { --brand: #0077ff; }
+
+.fl-tile .fl-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.fl-tile:hover {
+  transform: translateY(-1px);
+  border-color: var(--brand);
+}
+
+.fl-tile.is-on {
+  border-color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 9%, #fff);
+  box-shadow: inset 0 0 0 1px var(--brand);
+}
+
+.fl-tile__check {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #cfd6e0;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.fl-tile.is-on .fl-tile__check {
+  border-color: var(--brand);
+  background:
+    radial-gradient(circle, var(--brand) 0 5px, transparent 5.5px);
+}
+
+.fl-tiles-card__fields {
+  display: grid;
+  margin: 22px 0 12px;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.fl-add {
+  padding: 6px 0;
+  color: #0a64ff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ── 4. Тёмный разворот ────────────────────────────────────────────────── */
+
+.fl-dark-form {
+  padding: 36px;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 28px;
+  background:
+    linear-gradient(rgb(255 255 255 / 4%) 1px, transparent 1px) 0 0 / 36px 36px,
+    linear-gradient(90deg, rgb(255 255 255 / 4%) 1px, transparent 1px) 0 0 / 36px 36px,
+    #152238;
+}
+
+.fl-dark-form__title {
+  margin-bottom: 24px;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.fl-step {
+  display: grid;
+  padding: 18px 0;
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  column-gap: 16px;
+  grid-template-columns: 28px 1fr;
+  row-gap: 12px;
+}
+
+.fl-step b {
+  grid-row: span 3;
+  color: #5c9dff;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.fl-step > span {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.fl-step em {
+  color: rgb(255 255 255 / 40%);
+}
+
+.fl-step input,
+.fl-step textarea {
+  padding: 8px 0;
+  border-bottom: 1px solid rgb(255 255 255 / 25%);
+  background: none;
+  font-size: 18px;
+  transition: border-color 180ms linear;
+}
+
+.fl-step input:focus,
+.fl-step textarea:focus {
+  border-color: #5c9dff;
+}
+
+.fl-dark-form .fl-split ::placeholder,
+.fl-dark-form ::placeholder {
+  color: rgb(255 255 255 / 30%);
+}
+
+.fl-dark-form .fl-consent {
+  color: rgb(255 255 255 / 40%);
+}
+
+/* ── 5. Письмо одной фразой ───────────────────────────────────────────── */
+
+.fl-letter {
+  padding: 40px;
+  border-radius: 28px;
+  background: #eef3ff;
+}
+
+.fl-letter__text {
+  font-size: clamp(22px, 2.3vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.5;
+}
+
+.fl-letter__text--muted {
+  margin-top: 18px;
+  color: #5d6675;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.fl-letter .fl-inline {
+  display: inline-block;
+  width: auto;
+  padding: 0 4px;
+  border-bottom: 2px solid #0a64ff;
+  background: none;
+  color: #0a64ff;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+
+.fl-letter .fl-inline--wide {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.fl-letter .fl-inline::placeholder {
+  color: #9dbbf5;
+}
+
+.fl-letter__channels {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 8px 0 6px;
+  gap: 8px;
+}
+
+.fl-word {
+  padding: 4px 14px;
+  border: 2px solid #c8d8f7;
+  border-radius: 999px;
+  color: #6f86ad;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: all 160ms linear;
+}
+
+.fl-word:hover {
+  border-color: #0a64ff;
+  color: #0a64ff;
+}
+
+.fl-word.is-on {
+  border-color: #0a64ff;
+  background: #0a64ff;
+  color: #fff;
+}
+
+.fl-letter__task {
+  margin-top: 10px;
+  padding: 14px 18px;
+  border: 1px solid #c8d8f7;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.fl-letter__task:focus {
+  border-color: #0a64ff;
+}
+
+/* ── Мобильная раскладка: половины встают друг под друга ───────────────── */
+
+@media (max-width: 960px) {
+  .fl-split {
+    padding: 44px 20px 28px;
+    border-radius: 26px;
+    gap: 40px;
+    grid-template-columns: 1fr;
+  }
+
+  .fl-split__right {
+    position: static;
+  }
+
+  .fl-card,
+  .fl-tiles-card,
+  .fl-blue,
+  .fl-dark-form,
+  .fl-letter {
+    padding: 24px 18px;
+  }
+}
+
+@media (max-width: 520px) {
+  .fl-blue__row,
+  .fl-tiles-card__fields {
+    grid-template-columns: 1fr;
+  }
+
+  /* Плитки оставляем 2×2, иначе они съедают пол-экрана */
+  .fl-tile {
+    padding: 12px;
+    font-size: 15px;
+    gap: 9px;
+  }
+
+  .fl-tile .fl-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .fl-tile__check {
+    display: none;
+  }
+
+  .fl-faq__text {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fl-faq__a,
+  .fl-faq__sign::before,
+  .fl-faq__sign::after {
+    transition: none;
+  }
+}

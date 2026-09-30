@@ -3,8 +3,8 @@
 // Блок вопросов и ответов. Вопросы разделены только линиями — так он не спорит
 // с соседними секциями, где и так много плашек.
 //
-// Раскрыт всегда один ответ: открывая следующий, предыдущий закрываем. Блок из
-// одних заголовков выглядит недоделанным, поэтому первый вопрос открыт сразу.
+// Раскрыт не больше одного ответа: открывая следующий, предыдущий закрываем.
+// При загрузке все вопросы свёрнуты — так попросил заказчик.
 
 import { useState } from 'react';
 
@@ -43,7 +43,7 @@ const questions = [
 ];
 
 export function FaqSection() {
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState(-1);
 
   return (
     <section className="faq-section" id="faq">
@@ -85,7 +85,7 @@ export function FaqSection() {
           </div>
         </div>
 
-        <div className="faq-lead">
+        <div className="faq-lead" id="zayavka">
           <LeadForm />
         </div>
       </div>

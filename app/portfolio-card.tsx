@@ -2,6 +2,8 @@
 
 import { useRef, useState, type CSSProperties } from 'react';
 
+import { canPreloadHoverMedia, useNearViewport } from './use-near-viewport';
+
 type PortfolioItem = {
   image: string;
   note: string;
@@ -16,8 +18,12 @@ type PortfolioCardProps = {
 };
 
 export function PortfolioCard({ index, item }: PortfolioCardProps) {
+  const cardRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoActive, setIsVideoActive] = useState(false);
+  // Ролик и его заставка грузятся, только когда карточка подъезжает к экрану:
+  // при открытии страницы они не отнимают канал у первого экрана.
+  const isNear = useNearViewport(cardRef);
 
   const startVideo = () => {
     if (!item.video) {
@@ -61,6 +67,7 @@ export function PortfolioCard({ index, item }: PortfolioCardProps) {
       onFocus={startVideo}
       onPointerEnter={startVideo}
       onPointerLeave={stopVideo}
+      ref={cardRef}
       style={{ '--portfolio-delay': `${index * 160}ms` } as CSSProperties}
       tabIndex={item.video ? 0 : undefined}
     >
@@ -70,6 +77,8 @@ export function PortfolioCard({ index, item }: PortfolioCardProps) {
           className={`portfolio-image absolute inset-0 h-full w-full object-cover ${
             isVideoActive ? 'opacity-0' : 'opacity-100'
           }`}
+          decoding="async"
+          loading="lazy"
           src={item.image}
         />
 
@@ -82,8 +91,8 @@ export function PortfolioCard({ index, item }: PortfolioCardProps) {
             loop
             muted
             playsInline
-            poster={item.image}
-            preload="metadata"
+            poster={isNear ? item.image : undefined}
+            preload={isNear ? (canPreloadHoverMedia() ? 'auto' : 'metadata') : 'none'}
             ref={videoRef}
             src={item.video}
           />

@@ -1,0 +1,319 @@
+/* ── Витрина концептов блока FAQ (страница /faq-demo, временная) ─────────── */
+
+.fq-page {
+  padding: 56px 0 120px;
+  background: #f2f4f7;
+  color: #141f32;
+}
+
+.fq-head {
+  max-width: 760px;
+  margin: 0 auto 52px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.fq-head h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.fq-head p {
+  margin-top: 14px;
+  color: #5d6675;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.fq-concept {
+  max-width: 1160px;
+  margin: 0 auto 40px;
+  padding: 0 24px;
+}
+
+.fq-concept__head {
+  max-width: 720px;
+  margin-bottom: 18px;
+}
+
+.fq-concept__head h2 {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.fq-concept__head p {
+  margin-top: 6px;
+  color: #5d6675;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.fq-concept__body {
+  padding: 46px 52px 50px;
+  border-radius: 28px;
+  background: #fff;
+}
+
+.fq-lead {
+  margin-bottom: 30px;
+}
+
+.fq-eyebrow {
+  color: #98a1af;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.fq-lead h3 {
+  margin-top: 10px;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+/* Аккордеон: общая механика */
+.fq-item {
+  border-top: 1px solid #e7eaef;
+}
+
+.fq-item:last-child {
+  border-bottom: 1px solid #e7eaef;
+}
+
+.fq-q {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  gap: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fq-q__text {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  transition: color 200ms linear;
+}
+
+.fq-q:hover .fq-q__text {
+  color: #0a64ff;
+}
+
+/* Плюс, который на раскрытии становится минусом */
+.fq-sign {
+  position: relative;
+  flex: 0 0 22px;
+  height: 22px;
+}
+
+.fq-sign::before,
+.fq-sign::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #141f32;
+  content: '';
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fq-sign::before {
+  width: 15px;
+  height: 2px;
+  transform: translate(-50%, -50%);
+}
+
+.fq-sign::after {
+  width: 2px;
+  height: 15px;
+  transform: translate(-50%, -50%);
+}
+
+.fq-item--open .fq-sign::after {
+  transform: translate(-50%, -50%) scaleY(0);
+}
+
+.fq-a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fq-item--open .fq-a {
+  grid-template-rows: 1fr;
+}
+
+.fq-a__inner {
+  overflow: hidden;
+}
+
+.fq-a p {
+  max-width: 62ch;
+  padding-bottom: 22px;
+  color: #5d6675;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* 2. Карточки */
+.fq-concept--cards .fq-list {
+  display: grid;
+  gap: 12px;
+}
+
+.fq-concept--cards .fq-item {
+  padding: 4px 22px;
+  border: 1px solid #e7eaef;
+  border-radius: 16px;
+  background: #fafbfc;
+  transition: background 220ms linear, border-color 220ms linear;
+}
+
+.fq-concept--cards .fq-item--open,
+.fq-concept--cards .fq-item:hover {
+  border-color: #cfd6e0;
+  background: #fff;
+}
+
+/* 3. С номерами */
+.fq-concept--numbered .fq-q {
+  padding: 26px 0;
+}
+
+.fq-concept--numbered .fq-q__text {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.fq-num {
+  flex: 0 0 46px;
+  color: #b7bfcb;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.fq-concept--numbered .fq-a p {
+  padding-left: 62px;
+  font-size: 16px;
+}
+
+/* 4. Тёмная секция */
+.fq-concept--dark .fq-concept__body {
+  background: #101625;
+  color: #fff;
+}
+
+.fq-concept--dark .fq-eyebrow { color: rgb(255 255 255 / 45%); }
+.fq-concept--dark .fq-item { border-top-color: rgb(255 255 255 / 12%); }
+.fq-concept--dark .fq-item:last-child { border-bottom-color: rgb(255 255 255 / 12%); }
+.fq-concept--dark .fq-a p { color: rgb(255 255 255 / 64%); }
+.fq-concept--dark .fq-sign::before,
+.fq-concept--dark .fq-sign::after { background: #fff; }
+.fq-concept--dark .fq-q:hover .fq-q__text { color: #7fb0ff; }
+.fq-concept--dark .fq-item--open .fq-q__text { color: #7fb0ff; }
+
+/* 5. Вопросы слева, ответ справа */
+.fq-split {
+  display: grid;
+  gap: 34px;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+}
+
+.fq-split__menu {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+}
+
+.fq-split__tab {
+  display: block;
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 200ms linear;
+}
+
+.fq-split__tab:hover {
+  background: #f4f6f9;
+}
+
+.fq-split__tab--on {
+  background: #eef3ff;
+}
+
+.fq-split__short {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.fq-split__tab--on .fq-split__short {
+  color: #0a64ff;
+}
+
+.fq-split__hint {
+  display: block;
+  margin-top: 3px;
+  overflow: hidden;
+  color: #98a1af;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fq-split__body {
+  padding: 30px 32px;
+  border-radius: 20px;
+  background: #fafbfc;
+}
+
+.fq-split__body h4 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.fq-split__body p {
+  max-width: 62ch;
+  margin-top: 14px;
+  color: #5d6675;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.fq-split__cta {
+  display: inline-block;
+  margin-top: 26px;
+  color: #0a64ff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fq-a,
+  .fq-sign::before,
+  .fq-sign::after {
+    transition: none;
+  }
+}
+
+@media (width < 860px) {
+  .fq-concept__body { padding: 30px 22px 34px; }
+  .fq-split { grid-template-columns: 1fr; }
+}

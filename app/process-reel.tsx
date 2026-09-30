@@ -1,58 +1,62 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+
+import { useNearViewport } from './use-near-viewport';
+
+// Картинки шагов. На странице видна одна, остальные появляются по клику —
+// их заранее кладём в кеш, чтобы переключение шло без паузы на загрузку.
+const STEP_IMAGES = [
+  '/process-idea-route-transparent.webp',
+  '/process-design-responsive.webp',
+  '/process-development-split-screen.webp',
+  '/process-launch-rocket-wide-v1.webp',
+];
 
 const steps = [
   {
     title: 'Строим карту продукта',
     copy: 'Находим, где клиент теряет деньги и внимание пользователя — и собираем сценарий, который эту проблему закрывает.',
     label: 'Идея',
-    preview: 'Карта продукта',
-    stat: '12 сценариев',
-    facts: ['проблема клиента', 'путь пользователя', 'точки роста'],
-    result:
-      'Понимаем, зачем продукт нужен рынку и за что клиент будет платить.',
   },
   {
     title: 'Делаем интерфейс, который продаёт',
     copy: 'Собираем понятный UI/UX, выстраиваем акценты и CTA так, чтобы человек быстро доходил до целевого действия.',
     label: 'Дизайн',
-    preview: 'Интерфейс продукта',
-    stat: '24 экрана',
-    facts: ['понятная навигация', 'сильный CTA', 'доверие к бренду'],
-    result:
-      'Пользователь понимает, что делать, и не теряется на пути к заявке.',
   },
   {
     title: 'Собираем MVP и показываем по этапам',
     copy: 'Фиксируем план, собираем первую рабочую версию и выносим каждый этап на оценку заказчику — без сюрпризов в конце.',
     label: 'Разработка',
-    preview: 'Рабочий продукт',
-    stat: 'MVP 2 недели',
-    facts: ['план и смета', 'демо каждую неделю', 'правки по ходу'],
-    result:
-      'Заказчик видит прогресс, влияет на решение и получает готовый MVP в понятный срок.',
   },
   {
     title: 'Запускаем и измеряем результат',
     copy: 'Передаём продукт команде заказчика, помогаем с запуском и смотрим, как меняются заявки, продажи и поведение клиентов.',
     label: 'Запуск',
-    preview: 'Первые результаты',
-    stat: '+42% заявок',
-    facts: ['передача команде', 'сбор обратной связи', 'рост конверсии'],
-    result:
-      'Продукт начинает приносить измеримый результат — больше обращений и быстрее путь к покупке.',
   },
 ];
 
 export function ProcessReel() {
   const [activeStep, setActiveStep] = useState(0);
   const step = steps[activeStep];
+  const sectionRef = useRef<HTMLElement>(null);
+  const isNear = useNearViewport(sectionRef);
+
+  useEffect(() => {
+    if (!isNear) return;
+
+    for (const src of STEP_IMAGES) {
+      const image = new window.Image();
+      image.decoding = 'async';
+      image.src = src;
+    }
+  }, [isNear]);
 
   return (
     <section
       id="process"
+      ref={sectionRef}
       aria-label="Как Rhino Studio превращает идею в продукт"
       className="hero-strip mx-auto max-w-[1360px] scroll-mt-28 px-5 pb-14 sm:px-8 lg:px-12"
     >
@@ -115,7 +119,7 @@ export function ProcessReel() {
             <figure className="min-w-0">
               <div className="process-route-visual">
                 <Image
-                  src="/process-idea-route-transparent.png"
+                  src={STEP_IMAGES[0]}
                   alt="Карта продукта: пользователь приходит с задачей, проходит по голубому маршруту, находит решение и получает результат."
                   width={1651}
                   height={953}
@@ -131,22 +135,19 @@ export function ProcessReel() {
             <figure className="min-w-0 lg:translate-y-2">
               <Image
                 className="block h-auto w-full"
-                src="/process-design-responsive.png"
+                src={STEP_IMAGES[1]}
                 alt="Один интерфейс магазина светильников на большом экране и смартфоне: одинаковые визуальные акценты и кнопка выбора, адаптированные под каждое устройство."
                 width={1612}
                 height={975}
                 unoptimized
                 decoding="async"
               />
-              <figcaption className="mt-3 text-center text-sm leading-6 text-white/64 sm:text-base">
-                Понятно на любом экране
-              </figcaption>
             </figure>
           ) : activeStep === 2 ? (
             <figure className="min-w-0 lg:-mr-4 lg:w-[94%] lg:justify-self-end">
               <Image
                 className="process-development-image block h-auto w-full"
-                src="/process-development-split-screen.png"
+                src={STEP_IMAGES[2]}
                 alt="Единый экран разработки: слева редактор кода, справа работающая форма записи на консультацию."
                 width={1080}
                 height={735}
@@ -158,7 +159,7 @@ export function ProcessReel() {
             <figure className="flex h-full min-w-0 items-center justify-center lg:-mr-6">
               <Image
                 className="block h-auto max-h-full w-auto max-w-none object-contain mix-blend-lighten lg:max-h-[430px]"
-                src="/process-launch-rocket-wide-v1.png"
+                src={STEP_IMAGES[3]}
                 alt="Ракета запускается из окна веб-приложения."
                 width={1536}
                 height={1024}

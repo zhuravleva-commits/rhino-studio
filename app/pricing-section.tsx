@@ -214,7 +214,7 @@ export function PricingSection() {
                         ))}
                       </ul>
 
-                      <a href="mailto:hello@rhino.studio">Обсудить проект</a>
+                      <a href="#zayavka">Обсудить проект</a>
                     </article>
                   </li>
                 );

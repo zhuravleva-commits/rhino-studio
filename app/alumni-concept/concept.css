@@ -1,0 +1,953 @@
+/* Концепт «Alumni Sans + Inter» (страница /alumni-concept, временная).
+   Всё с префиксом al-, чтобы не пересекаться с боевыми стилями.
+
+   Система:
+   — заголовки: Alumni Sans, прописные, плотный интерлиньяж 0.82–0.9;
+   — текст, кнопки, подписи: Inter;
+   — цвета: белый, почти чёрный синий и один акцент — фирменный синий;
+   — ритм секций: белая → синяя строка → белая → тёмная → белая → голубая
+     → белая → синий подвал. */
+
+.al {
+  --ink: #0d1526;
+  --blue: #0a64ff;
+  --blue-deep: #0850cc;
+  --wash: #eaf1ff;
+  --line: #e3e8f0;
+  --muted: #5d6675;
+  --display: 'Alumni Sans', 'Arial Narrow', sans-serif;
+  --text: 'Inter', Arial, sans-serif;
+
+  overflow-x: clip;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.al em {
+  color: var(--blue);
+  font-style: normal;
+}
+
+/* ── Общие элементы ────────────────────────────────────────────────────── */
+
+.al-eyebrow {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.al-h2 {
+  margin-top: 14px;
+  font-family: var(--display);
+  font-size: clamp(64px, 10vw, 160px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 0.84;
+  text-transform: uppercase;
+}
+
+.al-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 30px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 200ms linear, transform 200ms ease;
+}
+
+.al-btn:hover {
+  background: var(--blue-deep);
+  transform: translateY(-2px);
+}
+
+.al-btn--sm {
+  padding: 12px 22px;
+  font-size: 14px;
+}
+
+.al-btn--ghost {
+  border: 1px solid #cfd6e0;
+  background: #fff;
+  color: var(--ink);
+}
+
+.al-btn--ghost:hover {
+  border-color: var(--ink);
+  background: #fff;
+}
+
+.al-btn--white {
+  width: 100%;
+  margin-top: 6px;
+  background: #fff;
+  color: var(--blue);
+}
+
+.al-btn--white:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+.al-section {
+  padding: clamp(80px, 10vw, 140px) clamp(20px, 4vw, 56px);
+}
+
+.al-section__head {
+  display: grid;
+  align-items: end;
+  margin-bottom: clamp(40px, 6vw, 72px);
+  column-gap: 48px;
+  grid-template-columns: 1fr auto;
+}
+
+.al-section__head .al-eyebrow {
+  grid-column: 1 / -1;
+}
+
+.al-section__copy {
+  max-width: 360px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+/* ── Шапка ─────────────────────────────────────────────────────────────── */
+
+.al-header {
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  display: flex;
+  align-items: center;
+  padding: 14px clamp(20px, 4vw, 56px);
+  border-bottom: 1px solid var(--line);
+  background: rgb(255 255 255 / 86%);
+  backdrop-filter: blur(14px);
+  gap: 32px;
+}
+
+.al-logo {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.al-header nav {
+  display: flex;
+  margin-left: auto;
+  gap: 28px;
+}
+
+.al-header nav a {
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 160ms linear;
+}
+
+.al-header nav a:hover {
+  color: var(--blue);
+}
+
+/* ── Первый экран ──────────────────────────────────────────────────────── */
+
+.al-hero {
+  position: relative;
+  padding: clamp(48px, 6vw, 84px) clamp(20px, 4vw, 56px) clamp(56px, 6vw, 80px);
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 64px 64px,
+    #fff;
+}
+
+.al-hero__title {
+  position: relative;
+  z-index: 1;
+  margin-top: 22px;
+  font-family: var(--display);
+  font-size: clamp(88px, 15vw, 248px);
+  font-weight: 800;
+  letter-spacing: -0.012em;
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+
+.al-hero__title > span {
+  display: block;
+}
+
+/* Работа студии внутри строки заголовка: капсула с превью приложения */
+.al-hero__pill {
+  display: inline-block;
+  width: 1.55em;
+  height: 0.62em;
+  margin: 0 -0.08em;
+  border-radius: 999px;
+  background: url('/portfolio-visa.webp') center 35% / cover, var(--wash);
+  box-shadow: inset 0 0 0 1px rgb(10 100 255 / 18%);
+  vertical-align: 0.04em;
+}
+
+/* Объёмные иконки услуг парят вокруг заголовка */
+.al-hero__float {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  filter: drop-shadow(0 30px 40px rgb(10 60 160 / 18%));
+  animation: al-float 7s ease-in-out infinite;
+}
+
+.al-hero__float--a {
+  top: 6%;
+  right: 6%;
+  width: clamp(120px, 15vw, 230px);
+  rotate: 12deg;
+}
+
+.al-hero__float--b {
+  top: 55%;
+  left: 55%;
+  width: clamp(80px, 9vw, 140px);
+  rotate: -14deg;
+  animation-delay: -3.5s;
+}
+
+@keyframes al-float {
+  50% {
+    translate: 0 -14px;
+  }
+}
+
+.al-hero__bottom {
+  display: grid;
+  align-items: end;
+  margin-top: clamp(36px, 5vw, 64px);
+  gap: 32px;
+  grid-template-columns: minmax(0, 1.1fr) auto minmax(0, 1.2fr);
+}
+
+.al-lead {
+  max-width: 440px;
+  color: #3d4757;
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.al-hero__cta {
+  display: flex;
+  gap: 10px;
+}
+
+.al-facts {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.al-facts div {
+  padding: 4px 0 4px 20px;
+  border-left: 1px solid var(--line);
+}
+
+.al-facts dt {
+  font-family: var(--display);
+  font-size: clamp(40px, 4vw, 60px);
+  font-weight: 800;
+  line-height: 0.9;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.al-facts dd {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+/* ── Бегущая строка ────────────────────────────────────────────────────── */
+
+.al-ticker {
+  overflow: hidden;
+  padding: 18px 0 14px;
+  background: var(--blue);
+  color: #fff;
+}
+
+.al-ticker__track {
+  display: flex;
+  width: max-content;
+  animation: al-ticker 32s linear infinite;
+}
+
+.al-ticker__word {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 34px;
+  font-family: var(--display);
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 700;
+  gap: 34px;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.al-ticker__word b {
+  color: rgb(255 255 255 / 55%);
+  font-size: 0.6em;
+  font-weight: 400;
+}
+
+@keyframes al-ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ── Услуги: строки-указатели ──────────────────────────────────────────── */
+
+.al-services {
+  border-top: 1px solid var(--ink);
+}
+
+.al-service {
+  position: relative;
+  display: grid;
+  align-items: center;
+  padding: clamp(18px, 2vw, 28px) clamp(8px, 1.5vw, 24px);
+  border-bottom: 1px solid var(--ink);
+  column-gap: clamp(16px, 3vw, 48px);
+  grid-template-columns: 56px minmax(0, 1fr) auto 64px;
+  transition: background 260ms ease, color 260ms ease;
+}
+
+.al-service__num {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 260ms ease;
+}
+
+.al-service__title {
+  font-family: var(--display);
+  font-size: clamp(64px, 9vw, 150px);
+  font-weight: 800;
+  line-height: 0.86;
+  text-transform: uppercase;
+  transition: translate 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.al-service__tags {
+  display: flex;
+  gap: 8px;
+  transition: opacity 200ms ease;
+}
+
+.al-service:hover .al-service__tags {
+  opacity: 0;
+}
+
+.al-service__tags span {
+  padding: 7px 14px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.al-service__arrow {
+  justify-self: end;
+  font-size: 34px;
+  transition: rotate 300ms ease;
+}
+
+/* Объёмная иконка выпрыгивает на месте тегов при наведении — так она
+   не закрывает длинные названия */
+.al-service__img {
+  position: absolute;
+  top: 50%;
+  right: clamp(90px, 12vw, 180px);
+  width: clamp(120px, 12vw, 190px);
+  opacity: 0;
+  pointer-events: none;
+  rotate: -8deg;
+  scale: 0.6;
+  translate: 0 -50%;
+  transition: opacity 260ms ease, scale 420ms cubic-bezier(0.22, 1.4, 0.36, 1), rotate 420ms ease;
+}
+
+.al-service:hover {
+  background: var(--blue);
+  color: #fff;
+}
+
+.al-service:hover .al-service__num {
+  color: rgb(255 255 255 / 70%);
+}
+
+.al-service:hover .al-service__title {
+  translate: 16px 0;
+}
+
+.al-service:hover .al-service__img {
+  opacity: 1;
+  rotate: 6deg;
+  scale: 1;
+}
+
+.al-service:hover .al-service__arrow {
+  rotate: 45deg;
+}
+
+/* ── Цены: тёмная секция ───────────────────────────────────────────────── */
+
+.al-section--dark {
+  background: var(--ink);
+  color: #fff;
+}
+
+.al-section--dark em {
+  color: #5c9dff;
+}
+
+.al-section--dark .al-eyebrow {
+  color: #5c9dff;
+}
+
+.al-section--dark .al-section__copy {
+  color: rgb(255 255 255 / 60%);
+}
+
+.al-prices {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.al-price {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 24px 8px;
+  border-top: 1px solid rgb(255 255 255 / 20%);
+  border-left: 1px solid rgb(255 255 255 / 10%);
+  transition: background 240ms ease;
+}
+
+.al-price:first-child {
+  border-left: 0;
+}
+
+.al-price:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.al-price__label {
+  color: rgb(255 255 255 / 50%);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.al-price h3 {
+  margin-top: 14px;
+  font-family: var(--display);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.al-price__value {
+  display: flex;
+  align-items: baseline;
+  margin: 36px 0 18px;
+  font-family: var(--display);
+  font-size: clamp(64px, 6.4vw, 108px);
+  font-weight: 800;
+  gap: 8px;
+  line-height: 0.8;
+  white-space: nowrap;
+}
+
+.al-price__value small {
+  color: #5c9dff;
+  font-size: 0.34em;
+  font-weight: 700;
+}
+
+.al-price__note {
+  margin-top: auto;
+  padding-bottom: 20px;
+  color: rgb(255 255 255 / 60%);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ── Процесс ───────────────────────────────────────────────────────────── */
+
+.al-steps {
+  display: grid;
+  gap: clamp(16px, 2vw, 28px);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.al-step {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  border-top: 2px solid var(--ink);
+}
+
+/* Номер этапа — контуром, чтобы не спорить с заголовками секций */
+.al-step__num {
+  color: transparent;
+  font-family: var(--display);
+  font-size: clamp(110px, 12vw, 190px);
+  font-weight: 800;
+  line-height: 0.8;
+  -webkit-text-stroke: 2px var(--blue);
+  transition: color 300ms ease;
+}
+
+.al-step:hover .al-step__num {
+  color: var(--blue);
+}
+
+.al-step__label {
+  margin-top: 22px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.al-step h3 {
+  margin: 8px 0 10px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.al-step p:not(.al-step__label) {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.al-step__stat {
+  align-self: flex-start;
+  margin-top: 18px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--wash);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ── Работы: голубая секция ────────────────────────────────────────────── */
+
+.al-section--wash {
+  background: var(--wash);
+}
+
+.al-works {
+  display: grid;
+  gap: clamp(28px, 4vw, 56px) clamp(16px, 2.4vw, 32px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Шахматный сдвиг: правая колонка опущена — сетка не выглядит таблицей */
+.al-work:nth-child(even) {
+  translate: 0 clamp(40px, 6vw, 96px);
+}
+
+.al-works {
+  padding-bottom: clamp(40px, 6vw, 96px);
+}
+
+.al-work__img {
+  overflow: hidden;
+  border-radius: 28px;
+  background: #fff;
+  aspect-ratio: 16 / 10;
+}
+
+.al-work__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.al-work:hover .al-work__img img {
+  scale: 1.05;
+}
+
+.al-work__type {
+  margin-top: 18px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.al-work h3 {
+  margin-top: 6px;
+  font-family: var(--display);
+  font-size: clamp(40px, 4.4vw, 68px);
+  font-weight: 700;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+/* ── Вопросы и заявка ──────────────────────────────────────────────────── */
+
+.al-split {
+  display: grid;
+  align-items: start;
+  gap: clamp(40px, 6vw, 96px);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+}
+
+.al-split .al-h2 {
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.al-faq__item {
+  border-top: 1px solid var(--line);
+}
+
+.al-faq__item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.al-faq__item button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 22px 0;
+  color: inherit;
+  font: inherit;
+  gap: 18px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.al-faq__num {
+  flex: 0 0 26px;
+  color: #b0b8c4;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.al-faq__q {
+  flex: 1;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  transition: color 200ms linear;
+}
+
+.al-faq__item button:hover .al-faq__q,
+.al-faq__item.is-open .al-faq__q,
+.al-faq__item.is-open .al-faq__num {
+  color: var(--blue);
+}
+
+.al-faq__sign {
+  position: relative;
+  flex: 0 0 20px;
+  height: 20px;
+}
+
+.al-faq__sign::before,
+.al-faq__sign::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  background: currentColor;
+  content: '';
+  translate: -50% -50%;
+  transition: rotate 260ms ease;
+}
+
+.al-faq__sign::after {
+  rotate: 90deg;
+}
+
+.al-faq__item.is-open .al-faq__sign {
+  color: var(--blue);
+}
+
+.al-faq__item.is-open .al-faq__sign::after {
+  rotate: 0deg;
+}
+
+.al-faq__a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.al-faq__a > div {
+  overflow: hidden;
+}
+
+.al-faq__item.is-open .al-faq__a {
+  grid-template-rows: 1fr;
+}
+
+.al-faq__a p {
+  padding: 0 40px 24px 44px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Форма — синяя карточка: главный призыв страницы */
+.al-form {
+  position: sticky;
+  top: 96px;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: 32px;
+  background:
+    radial-gradient(120% 80% at 100% 0%, #3d86ff 0%, transparent 60%),
+    var(--blue);
+  color: #fff;
+  gap: 12px;
+  box-shadow: 0 40px 80px -40px rgb(10 100 255 / 70%);
+}
+
+.al-form__title {
+  font-family: var(--display);
+  font-size: clamp(56px, 6vw, 88px);
+  font-weight: 800;
+  line-height: 0.84;
+  text-transform: uppercase;
+}
+
+.al-form__sub {
+  margin-bottom: 10px;
+  color: rgb(255 255 255 / 75%);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.al-form input,
+.al-form textarea {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid rgb(255 255 255 / 25%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 12%);
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+}
+
+.al-form textarea {
+  border-radius: 20px;
+  resize: vertical;
+}
+
+.al-form input:focus,
+.al-form textarea:focus {
+  border-color: #fff;
+  outline: none;
+}
+
+.al-form ::placeholder {
+  color: rgb(255 255 255 / 60%);
+}
+
+.al-form__channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.al-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px 8px 8px;
+  border: 1px solid rgb(255 255 255 / 30%);
+  border-radius: 999px;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.al-chip.is-on {
+  border-color: #fff;
+  background: #fff;
+  color: var(--blue);
+}
+
+.al .messenger-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Подвал ────────────────────────────────────────────────────────────── */
+
+.al-footer {
+  overflow: hidden;
+  padding: 36px clamp(20px, 4vw, 56px) 0;
+  background: var(--blue);
+  color: #fff;
+}
+
+.al-footer__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgb(255 255 255 / 30%);
+  font-size: 15px;
+  font-weight: 500;
+  gap: 16px;
+}
+
+.al-footer__row a:hover {
+  text-decoration: underline;
+}
+
+/* Название студии во всю ширину и «обрезано» низом страницы */
+.al-footer__word {
+  margin-bottom: -0.2em;
+  font-family: var(--display);
+  font-size: 21.5vw;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 0.9;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── Адаптив ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 1100px) {
+  .al-hero__bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .al-prices,
+  .al-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .al-price:nth-child(3) {
+    border-left: 0;
+  }
+
+  .al-service__tags {
+    display: none;
+  }
+
+  .al-service {
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+  }
+}
+
+@media (max-width: 760px) {
+  .al-header nav {
+    display: none;
+  }
+
+  .al-header .al-btn {
+    margin-left: auto;
+  }
+
+  .al-hero__float--b {
+    display: none;
+  }
+
+  .al-hero__float--a {
+    top: 150px;
+    right: 4%;
+    width: 96px;
+  }
+
+  /* В узкой колонке капсула оказывается одна на строке и рвёт заголовок */
+  .al-hero__pill {
+    display: none;
+  }
+
+  .al-hero__cta {
+    flex-wrap: wrap;
+  }
+
+  .al-facts {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .al-facts div {
+    padding-left: 12px;
+  }
+
+  .al-section__head {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+
+  .al-prices,
+  .al-steps,
+  .al-works,
+  .al-split {
+    grid-template-columns: 1fr;
+  }
+
+  .al-price {
+    border-left: 0;
+  }
+
+  .al-work:nth-child(even) {
+    translate: none;
+  }
+
+  .al-works {
+    padding-bottom: 0;
+  }
+
+  .al-form {
+    position: static;
+  }
+
+  .al-faq__a p {
+    padding-left: 44px;
+    padding-right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-hero__float,
+  .al-ticker__track {
+    animation: none;
+  }
+}

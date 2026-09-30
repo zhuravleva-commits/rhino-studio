@@ -1,0 +1,297 @@
+/* ── Витрина концептов блока заявки (страница /lead-demo, временная) ─────── */
+
+.ld-page {
+  padding: 56px 0 120px;
+  background: #f2f4f7;
+  color: #141f32;
+}
+
+.ld-head {
+  max-width: 760px;
+  margin: 0 auto 52px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.ld-head h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.ld-head p {
+  margin-top: 14px;
+  color: #5d6675;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.ld-concept {
+  max-width: 1100px;
+  margin: 0 auto 44px;
+  padding: 0 24px;
+}
+
+.ld-concept__head {
+  max-width: 720px;
+  margin-bottom: 16px;
+}
+
+.ld-concept__head h2 {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.ld-concept__head p {
+  margin-top: 6px;
+  color: #5d6675;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.ld-concept__body {
+  padding: 40px;
+  border-radius: 28px;
+  background: #fff;
+}
+
+/* Кнопка — общая для всех концептов */
+.ld-btn {
+  padding: 15px 28px;
+  border: 0;
+  border-radius: 999px;
+  background: #0a64ff;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 200ms ease, background 200ms linear;
+}
+
+.ld-btn:hover {
+  background: #0a55d8;
+  transform: translateY(-1px);
+}
+
+.ld-btn--lg {
+  padding: 19px 34px;
+  font-size: 17px;
+}
+
+.ld-btn--full {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* Поля */
+.ld-field {
+  display: block;
+}
+
+.ld-field__label {
+  display: block;
+  margin-bottom: 7px;
+  padding-left: 18px;
+  color: #98a1af;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.ld-field__input {
+  width: 100%;
+  padding: 14px 20px;
+  border: 1px solid #dfe3ea;
+  border-radius: 999px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 180ms linear, box-shadow 180ms linear;
+}
+
+.ld-field__input:focus {
+  border-color: #0a64ff;
+  box-shadow: 0 0 0 4px rgb(10 100 255 / 12%);
+  outline: none;
+}
+
+.ld-field__input::placeholder {
+  color: #b7bfcb;
+}
+
+/* 1. Строка-капсула */
+.ld-strip {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px 10px 30px;
+  border: 1px solid #dfe3ea;
+  border-radius: 999px;
+  background: #fafbfc;
+  gap: 18px;
+}
+
+.ld-strip__text {
+  font-size: 17px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ld-strip__input {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 4px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+}
+
+.ld-strip__input:focus {
+  outline: none;
+}
+
+.ld-strip__input::placeholder {
+  color: #b7bfcb;
+}
+
+/* 2. Широкая капсула */
+.ld-wide {
+  display: grid;
+  align-items: end;
+  padding: 36px 40px;
+  border: 1px solid #e3e7ee;
+  border-radius: 46px;
+  background: #fafbfc;
+  gap: 26px;
+  grid-template-columns: minmax(220px, 300px) 1fr;
+}
+
+.ld-wide__lead h3 {
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.ld-wide__lead p {
+  margin-top: 8px;
+  color: #5d6675;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ld-wide__fields {
+  display: grid;
+  align-items: end;
+  gap: 14px;
+  grid-template-columns: 1fr 1fr auto;
+}
+
+/* 3. Тёмная капсула */
+.ld-concept--dark .ld-wide {
+  border-color: transparent;
+  background: #101625;
+  color: #fff;
+}
+
+.ld-concept--dark .ld-wide__lead p { color: rgb(255 255 255 / 62%); }
+.ld-concept--dark .ld-field__label { color: rgb(255 255 255 / 52%); }
+
+.ld-concept--dark .ld-field__input {
+  border-color: rgb(255 255 255 / 16%);
+  background: rgb(255 255 255 / 6%);
+  color: #fff;
+}
+
+.ld-concept--dark .ld-field__input::placeholder { color: rgb(255 255 255 / 38%); }
+
+/* 4. Без полей */
+.ld-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 46px;
+  border-radius: 999px;
+  background: #eef3ff;
+  gap: 28px;
+}
+
+.ld-callout h3 {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.ld-callout p {
+  margin-top: 6px;
+  color: #5d6675;
+  font-size: 15px;
+}
+
+/* 5. Текст и форма */
+.ld-split {
+  display: grid;
+  padding: 38px 42px;
+  border: 1px solid #e3e7ee;
+  border-radius: 40px;
+  background: #fafbfc;
+  gap: 40px;
+  grid-template-columns: 1fr minmax(280px, 380px);
+}
+
+.ld-split__left h3 {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.ld-split__left ol {
+  margin-top: 18px;
+  display: grid;
+  gap: 11px;
+  counter-reset: step;
+}
+
+.ld-split__left li {
+  display: flex;
+  align-items: center;
+  color: #4a5262;
+  font-size: 15px;
+  gap: 12px;
+  counter-increment: step;
+}
+
+.ld-split__left li::before {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #e8f0ff;
+  color: #0a64ff;
+  content: counter(step);
+  font-size: 12px;
+  font-weight: 700;
+  flex: 0 0 24px;
+  place-items: center;
+}
+
+.ld-split__form {
+  display: grid;
+  gap: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ld-btn { transition: none; }
+  .ld-btn:hover { transform: none; }
+}
+
+@media (width < 880px) {
+  .ld-concept__body { padding: 24px; }
+  .ld-wide,
+  .ld-split { grid-template-columns: 1fr; border-radius: 34px; }
+  .ld-wide__fields { grid-template-columns: 1fr; }
+  .ld-strip { flex-wrap: wrap; border-radius: 34px; padding: 18px; }
+  .ld-callout { flex-direction: column; align-items: flex-start; border-radius: 34px; }
+}

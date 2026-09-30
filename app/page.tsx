@@ -3,7 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { NAME_ROWS } from './name-data';
+import { ContactList, ContactsMenu } from './contacts';
 import { FaqSection } from './faq-section';
+import { LeadDialog } from './lead-dialog';
 import { PortfolioCard } from './portfolio-card';
 import { PricingSection } from './pricing-section';
 import { ServiceCard } from './service-card';
@@ -14,7 +16,7 @@ const services = [
     label: 'сайты',
     title: 'Лендинги',
     lines: ['оффер', 'структура', 'запуск'],
-    image: '/service-sites.png',
+    image: '/service-sites.webp',
     video: '/service-sites-hover.mp4',
     videoFit: { height: '108.40%', x: '-0.22%', y: '-0.15%' },
   },
@@ -22,7 +24,7 @@ const services = [
     label: 'продукты',
     title: 'Веб-приложения',
     lines: ['UX', 'интерфейс', 'разработка'],
-    image: '/service-products.png',
+    image: '/service-products.webp',
     video: '/service-products-hover.mp4',
     videoFit: { height: '104.76%', x: '-3.81%', y: '-0.73%' },
   },
@@ -30,7 +32,7 @@ const services = [
     label: 'telegram',
     title: 'Mini apps',
     lines: ['боты', 'платежи', 'CRM'],
-    image: '/service-telegram.png',
+    image: '/service-telegram.webp',
     video: '/service-telegram-hover.mp4',
     videoKey: true,
     videoFit: { height: '101.02%', x: '-0.00%', y: '-0.00%' },
@@ -39,7 +41,7 @@ const services = [
     label: 'AI',
     title: 'AI-системы',
     lines: ['агенты', 'данные', 'автоматизация'],
-    image: '/service-ai.png',
+    image: '/service-ai.webp',
     video: '/service-ai-hover.mp4',
     videoFit: { height: '100.83%', x: '0.07%', y: '-0.00%' },
   },
@@ -50,28 +52,28 @@ const portfolioItems = [
     type: 'Мобильное приложение',
     title: 'Визовый центр',
     note: 'заявки, документы, чат и статус оформления',
-    image: '/portfolio-visa.png',
+    image: '/portfolio-visa.webp',
     video: '/portfolio-visa-hover.mp4',
   },
   {
     type: 'Веб + мобильное',
     title: 'Платформа недвижимости',
     note: 'поиск, карта, бронирование и чат с менеджером',
-    image: '/portfolio-real-estate-kling-preview-macbook.png',
+    image: '/portfolio-real-estate-kling-preview-macbook.webp',
     video: '/portfolio-real-estate-hover.mp4',
   },
   {
     type: 'Веб-приложение',
     title: 'CRM для сервисной компании',
     note: 'заявки, диспетчеризация и контроль показателей',
-    image: '/portfolio-crm-pages-preview.png',
+    image: '/portfolio-crm-pages-preview.webp',
     video: '/portfolio-crm-pages-hover.mp4',
   },
   {
     type: 'Мобильное приложение',
     title: 'Proxy manager',
     note: 'профили, подключение, подписка и диагностика',
-    image: '/portfolio-proxy-light.png',
+    image: '/portfolio-proxy-light.webp',
     video: '/portfolio-proxy-hover.mp4',
   },
 ];
@@ -93,11 +95,11 @@ export default function Home() {
           <a href="#pricing">Цены</a>
           <a href="#portfolio">Работы</a>
           <a href="#process">Процесс</a>
-          <a href="mailto:hello@rhino.studio">Контакты</a>
+          <ContactsMenu />
         </nav>
 
-        <a className="site-header__cta" href="mailto:hello@rhino.studio">
-          Обсудить проект <span aria-hidden="true">↗</span>
+        <a className="site-header__cta" href="#zayavka">
+          Обсудить проект
         </a>
       </header>
 
@@ -110,7 +112,8 @@ export default function Home() {
           className="reference-hero__image"
           height="2160"
           priority
-          src="/rhino-editorial-hero-4k.png"
+          src="/rhino-editorial-hero-4k.webp"
+          unoptimized
           width="3840"
         />
 
@@ -173,7 +176,7 @@ export default function Home() {
           <Image
             alt=""
             height="566"
-            src="/hero-card-chart.png"
+            src="/hero-card-chart.webp"
             unoptimized
             width="561"
           />
@@ -183,7 +186,7 @@ export default function Home() {
           <Image
             alt=""
             height="1119"
-            src="/hero-card-main.png"
+            src="/hero-card-main.webp"
             unoptimized
             width="1526"
           />
@@ -200,7 +203,7 @@ export default function Home() {
           <a
             aria-label="Обсудить проект"
             className="reference-hotspot reference-hotspot--main-cta"
-            href="mailto:hello@rhino.studio"
+            href="#zayavka"
           />
         </nav>
 
@@ -216,14 +219,15 @@ export default function Home() {
           <p>Создаём сайты, которые продают.</p>
           <a
             className="reference-hero-mobile__cta"
-            href="mailto:hello@rhino.studio"
+            href="#zayavka"
           >
-            Обсудить проект <span>↗</span>
+            Обсудить проект
           </a>
           <Image
             alt="Превью цифрового продукта Rhino Studio"
             height="2160"
-            src="/rhino-editorial-hero-4k.png"
+            src="/rhino-editorial-hero-4k.webp"
+            unoptimized
             width="3840"
           />
         </div>
@@ -291,13 +295,18 @@ export default function Home() {
 
       <FaqSection />
 
+      <LeadDialog />
+
       <footer className="site-footer">
         <div className="site-footer__inner">
           <div className="site-footer__legal">
             <Link href="/privacy">Политика обработки персональных данных</Link>
-            <p>© 2026 Arena Studio. Все права защищены.</p>
+            <p>© 2026 Rhino Studio. Все права защищены.</p>
           </div>
-          <div aria-hidden="true" className="site-footer__reserved" />
+          <div className="site-footer__contacts" id="contacts">
+            <p className="site-footer__title">Контакты</p>
+            <ContactList variant="footer" />
+          </div>
         </div>
       </footer>
     </main>

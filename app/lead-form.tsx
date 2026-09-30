@@ -23,7 +23,7 @@ import {
 } from './lead-validation';
 import { CHANNELS, MessengerIcon, type ChannelId } from './messengers';
 
-type Status = 'idle' | 'sending' | 'sent' | 'error';
+type Status = 'idle' | 'sending' | 'sent' | 'error' | 'limit';
 type Errors = { name?: string; phone?: string };
 
 // Перезапускает анимацию «тряски»: снимаем класс, заставляем браузер
@@ -37,11 +37,16 @@ function shake(ref: RefObject<HTMLInputElement | null>) {
   el.classList.add('lead-field--shake');
 }
 
-export function LeadForm() {
+// Форм на странице две — в блоке вопросов и во всплывающем окне, поэтому id
+// внутри формы получают приставку, иначе они бы повторялись.
+export function LeadForm({ idPrefix = 'lead' }: { idPrefix?: string }) {
   const [name, setName] = useState('');
   const [channel, setChannel] = useState<ChannelId>('telegram');
   const [phone, setPhone] = useState('');
   const [task, setTask] = useState('');
+  // Ловушка для ботов: поле спрятано от людей, а бот заполнит его наравне
+  // с остальными. Сервер такую заявку молча выбрасывает.
+  const [website, setWebsite] = useState('');
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>('idle');
 
@@ -122,7 +127,7 @@ export function LeadForm() {
       const response = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ name, channel, phone, task }),
+        body: JSON.stringify({ name, channel, phone, task, website }),
       });
 
       if (!response.ok) {
@@ -132,6 +137,9 @@ export function LeadForm() {
         if (body?.errors) {
           setStatus('idle');
           fail(body.errors);
+        } else if (response.status === 429) {
+          // С этого адреса за сутки уже ушло пять заявок.
+          setStatus('limit');
         } else {
           setStatus('error');
         }
@@ -179,7 +187,7 @@ export function LeadForm() {
       <label className="lead-row">
         <span className="lead-label">Имя</span>
         <input
-          aria-describedby={errors.name ? 'lead-name-error' : undefined}
+          aria-describedby={errors.name ? `${idPrefix}-name-error` : undefined}
           aria-invalid={Boolean(errors.name)}
           autoComplete="given-name"
           className={`lead-field${errors.name ? ' lead-field--error' : ''}`}
@@ -193,17 +201,17 @@ export function LeadForm() {
           value={name}
         />
         {errors.name && (
-          <span className="lead-error" id="lead-name-error" role="alert">
+          <span className="lead-error" id={`${idPrefix}-name-error`} role="alert">
             {errors.name}
           </span>
         )}
       </label>
 
       <div className="lead-row">
-        <span className="lead-label" id="lead-channel-label">
+        <span className="lead-label" id={`${idPrefix}-channel-label`}>
           Где удобнее общаться
         </span>
-        <div aria-labelledby="lead-channel-label" className="lead-channels" role="radiogroup">
+        <div aria-labelledby={`${idPrefix}-channel-label`} className="lead-channels" role="radiogroup">
           {CHANNELS.map((c) => (
             <button
               aria-checked={channel === c.id}
@@ -224,7 +232,7 @@ export function LeadForm() {
       <label className="lead-row">
         <span className="lead-label">Телефон</span>
         <input
-          aria-describedby={errors.phone ? 'lead-phone-error' : undefined}
+          aria-describedby={errors.phone ? `${idPrefix}-phone-error` : undefined}
           aria-invalid={Boolean(errors.phone)}
           autoComplete="tel"
           className={`lead-field${errors.phone ? ' lead-field--error' : ''}`}
@@ -245,7 +253,7 @@ export function LeadForm() {
           value={phone}
         />
         {errors.phone && (
-          <span className="lead-error" id="lead-phone-error" role="alert">
+          <span className="lead-error" id={`${idPrefix}-phone-error`} role="alert">
             {errors.phone}
           </span>
         )}
@@ -267,14 +275,38 @@ export function LeadForm() {
         />
       </label>
 
+      <input
+        aria-hidden="true"
+        autoComplete="off"
+        className="lead-trap"
+        name="website"
+        onChange={(e) => setWebsite(e.target.value)}
+        tabIndex={-1}
+        type="text"
+        value={website}
+      />
+
       <button className="lead-button" disabled={sending} type="submit">
         {sending ? 'Отправляем…' : 'Оставить заявку'}
       </button>
 
-      <p className={`lead-note${status === 'error' ? ' lead-note--error' : ''}`}>
-        {status === 'error'
-          ? 'Не отправилось. Попробуйте ещё раз или напишите на hello@rhino.studio'
-          : 'Нажимая кнопку, вы соглашаетесь на обработку персональных данных.'}
+      <p
+        className={`lead-note${status === 'error' || status === 'limit' ? ' lead-note--error' : ''}`}
+      >
+        {status === 'error' ? (
+          'Не отправилось. Попробуйте ещё раз или напишите на hello@rhino.studio'
+        ) : status === 'limit' ? (
+          'Сегодня вы уже отправили несколько заявок — мы их получили и скоро свяжемся. Если срочно, напишите на hello@rhino.studio'
+        ) : (
+          <>
+            Нажимая кнопку, вы соглашаетесь на{' '}
+            {/* В новой вкладке — чтобы не потерять заполненную форму */}
+            <a href="/privacy" rel="noopener" target="_blank">
+              обработку персональных данных
+            </a>
+            .
+          </>
+        )}
       </p>
     </form>
   );
