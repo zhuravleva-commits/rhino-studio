@@ -94,7 +94,7 @@ export function PortfolioCard({ index, item }: PortfolioCardProps) {
 
       <div className="mt-5">
         <div>
-          <h3 className="text-3xl font-semibold sm:text-4xl">{item.title}</h3>
+          <h3 className="text-[2rem] font-semibold sm:text-[2.25rem]">{item.title}</h3>
           <p className="mt-2 text-base leading-7 text-foreground/52">
             {item.note}
           </p>

@@ -56,13 +56,13 @@ export function ProcessReel() {
       aria-label="Как Rhino Studio превращает идею в продукт"
       className="hero-strip mx-auto max-w-[1360px] scroll-mt-28 px-5 pb-14 sm:px-8 lg:px-12"
     >
-      <div className="relative overflow-hidden rounded-[28px] bg-[#0d1015] px-6 py-8 text-white shadow-[0_24px_80px_rgb(0_0_0_/_14%)] sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+      <div className="relative overflow-hidden rounded-[28px] bg-[#0d1015] px-6 py-8 text-white shadow-[0_24px_80px_rgb(0_0_0_/_14%)] sm:px-8 sm:py-10 lg:px-10 lg:py-9">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_0%_0%,rgb(113_154_255_/_28%),transparent_46%)]"
         />
 
-        <div className="relative grid items-center gap-8 lg:h-[540px] lg:min-h-0 lg:grid-cols-[0.95fr_1.65fr] lg:gap-2">
+        <div className="relative grid items-center gap-8 lg:h-[440px] lg:min-h-0 lg:grid-cols-[0.95fr_1.65fr] lg:gap-2">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-white/50">
               {String(activeStep + 1).padStart(2, '0')} / {step.label}
@@ -70,10 +70,10 @@ export function ProcessReel() {
             <h2
               className={`mt-5 max-w-xl font-semibold leading-[0.98] tracking-[-0.035em] ${
                 activeStep === 1
-                  ? 'text-[clamp(2.2rem,10vw,3rem)] sm:text-6xl lg:text-[clamp(2.5rem,4.6vw,3.8rem)]'
+                  ? 'text-[clamp(2.5rem,11vw,3.25rem)] sm:text-[3.5rem] lg:text-[clamp(2.75rem,4.2vw,3.75rem)]'
                   : activeStep === 2
-                    ? 'text-[clamp(2.2rem,10vw,3rem)] sm:text-6xl lg:text-[clamp(2.5rem,4.2vw,3.7rem)]'
-                    : 'text-5xl sm:text-6xl lg:text-[clamp(3rem,5.4vw,4.5rem)]'
+                    ? 'text-[clamp(2.5rem,11vw,3.25rem)] sm:text-[3.5rem] lg:text-[clamp(2.75rem,4.2vw,3.75rem)]'
+                    : 'text-[2.75rem] sm:text-[3.5rem] lg:text-[clamp(2.75rem,4.4vw,4rem)]'
               }`}
             >
               {activeStep === 0 ? (
@@ -106,7 +106,7 @@ export function ProcessReel() {
                 step.title
               )}
             </h2>
-            <p className="mt-6 max-w-md text-lg leading-7 text-white/64 sm:text-xl sm:leading-8">
+            <p className="mt-6 max-w-md text-lg leading-7 text-white/64">
               {step.copy}
             </p>
           </div>
@@ -128,7 +128,7 @@ export function ProcessReel() {
               </figcaption>
             </figure>
           ) : activeStep === 1 ? (
-            <figure className="min-w-0 lg:translate-y-6">
+            <figure className="min-w-0 lg:translate-y-2">
               <Image
                 className="block h-auto w-full"
                 src="/process-design-responsive.png"
@@ -143,7 +143,7 @@ export function ProcessReel() {
               </figcaption>
             </figure>
           ) : activeStep === 2 ? (
-            <figure className="min-w-0 lg:-mr-4 lg:translate-y-2">
+            <figure className="min-w-0 lg:-mr-4 lg:w-[94%] lg:justify-self-end">
               <Image
                 className="process-development-image block h-auto w-full"
                 src="/process-development-split-screen.png"
@@ -157,7 +157,7 @@ export function ProcessReel() {
           ) : (
             <figure className="flex h-full min-w-0 items-center justify-center lg:-mr-6">
               <Image
-                className="block h-auto max-h-full w-auto max-w-none object-contain mix-blend-lighten lg:max-h-[530px]"
+                className="block h-auto max-h-full w-auto max-w-none object-contain mix-blend-lighten lg:max-h-[430px]"
                 src="/process-launch-rocket-wide-v1.png"
                 alt="Ракета запускается из окна веб-приложения."
                 width={1536}

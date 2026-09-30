@@ -1,10 +1,17 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Alumni_Sans, Geist_Mono, Inter } from 'next/font/google';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+// Шрифты сайта: Alumni Sans — заголовки (прописными), Inter — весь
+// остальной текст. Обоим нужна кириллица: сайт почти целиком на русском.
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin', 'cyrillic'],
+});
+
+const alumniSans = Alumni_Sans({
+  variable: '--font-alumni',
+  subsets: ['latin', 'cyrillic'],
 });
 
 const geistMono = Geist_Mono({
@@ -31,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${alumniSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>

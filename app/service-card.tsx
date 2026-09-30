@@ -65,7 +65,7 @@ export function ServiceCard({ index, service }: ServiceCardProps) {
 
   return (
     <article
-      className="service-card relative flex flex-col overflow-hidden rounded-[30px] bg-[#edf5fc] p-5 text-foreground sm:p-6 lg:aspect-[119/100] lg:p-7"
+      className="service-card relative flex flex-col overflow-hidden rounded-[30px] bg-[#edf5fc] p-5 text-foreground sm:p-6 lg:aspect-[3/2] lg:p-7"
       onBlur={stopVideo}
       onFocus={startVideo}
       onPointerEnter={startVideo}
@@ -79,7 +79,7 @@ export function ServiceCard({ index, service }: ServiceCardProps) {
           {String(index + 1).padStart(2, '0')} / {service.label}
         </p>
 
-        <h3 className="mt-3 text-[26px] font-semibold leading-[0.95] tracking-[-0.02em] text-black lg:text-[30px]">
+        <h3 className="mt-3 text-[28px] font-semibold leading-[0.95] tracking-[-0.02em] text-black lg:text-[32px]">
           {service.title}
         </h3>
 

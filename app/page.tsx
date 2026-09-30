@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { NAME_ROWS } from './name-data';
+import { FaqSection } from './faq-section';
 import { PortfolioCard } from './portfolio-card';
 import { PricingSection } from './pricing-section';
 import { ServiceCard } from './service-card';
@@ -201,29 +202,31 @@ export default function Home() {
 
       <section
         id="portfolio"
-        className="portfolio-pearl px-5 py-18 text-foreground sm:px-8 sm:py-24 lg:px-12"
+        className="portfolio-pearl px-5 py-16 text-foreground sm:px-8 sm:py-20 lg:px-12"
       >
         <div className="mx-auto max-w-[1360px]">
-          <div className="mb-16">
+          <div className="mb-12">
             <p className="mb-7 text-sm font-bold uppercase text-foreground/46">
               Портфолио
             </p>
-            <h2 className="max-w-5xl text-6xl font-semibold leading-[0.92] sm:text-8xl lg:text-9xl">
+            <h2 className="max-w-5xl text-[3.25rem] font-semibold leading-[0.92] sm:text-[4.5rem] lg:text-[clamp(3.25rem,6vw,5.5rem)]">
               Наши прошлые работы
             </h2>
-            <p className="mt-8 max-w-3xl text-xl leading-8 text-foreground/58 sm:text-2xl">
+            <p className="mt-8 max-w-3xl text-lg leading-7 text-foreground/58">
               Первые визуальные заготовки под будущие кейсы: без внешних
               ссылок, но уже с понятной подачей продукта.
             </p>
           </div>
 
-          <div className="portfolio-grid grid gap-x-8 gap-y-14 md:grid-cols-2">
+          <div className="portfolio-grid grid gap-x-8 gap-y-12 md:grid-cols-2">
             {portfolioItems.map((item, index) => (
               <PortfolioCard index={index} item={item} key={item.title} />
             ))}
           </div>
         </div>
       </section>
+
+      <FaqSection />
     </main>
   );
 }
